@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <Asset Type="RPGPlatformerEngine.PlayerUpgrade">
+    <Level>1</Level>
+    <UpgradePercent>0.1</UpgradePercent>
+    <Name>Reload Speed</Name>
+    <Description>Your weapon reloads faster</Description>  
+  </Asset>
+</XnaContent>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <Asset Type="RPGPlatformerEngine.PlayerUpgrade">
+    <Level>8</Level>
+    <UpgradePercent>2.7</UpgradePercent>
+    <Name>Weapon Damage</Name>
+    <Description>Your weapon deals more damage</Description>  
+  </Asset>
+</XnaContent>

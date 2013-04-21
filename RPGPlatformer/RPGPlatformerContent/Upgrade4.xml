@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <Asset Type="RPGPlatformerEngine.PlayerUpgrade">
+    <Level>12</Level>
+    <UpgradePercent>3.4</UpgradePercent>
+    <Name>Grenade Damage</Name>
+    <Description>Grenades deal more damage</Description>  
+  </Asset>
+</XnaContent>
