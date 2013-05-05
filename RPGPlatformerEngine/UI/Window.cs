@@ -11,7 +11,9 @@ namespace RPGPlatformerEngine.UI
     {
         protected List<Control> Controls;
 
-        Vector2 prevPosition; 
+        Vector2 prevPosition;
+
+        public bool Enabled { get; set; }
 
         public Window(Vector2 position,Texture2D texture) : base(position,texture)
         {
@@ -20,6 +22,7 @@ namespace RPGPlatformerEngine.UI
 
         public override void Update()
         {
+            if (!Enabled) return;
             prevPosition = Position;
             HandleDragging();
             foreach (Control c in Controls)
@@ -37,6 +40,7 @@ namespace RPGPlatformerEngine.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (!Enabled) return;
             base.Draw(spriteBatch);
             foreach (Control c in Controls)
                 c.Draw(spriteBatch);

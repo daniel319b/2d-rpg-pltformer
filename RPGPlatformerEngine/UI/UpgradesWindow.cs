@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework;
 
 namespace RPGPlatformerEngine.UI
 {
-    public class PlayerUpgradesWindow : Window
+    public class UpgradesWindow : Window
     {    
         List<PlayerUpgrade> upgrades;
 
-        public PlayerUpgradesWindow(Vector2 position, Texture2D texture)
-            : base(position, texture)
+        public UpgradesWindow()
+            : base(new Vector2(10), TextureManager.SetTexture("form"))
         {
             upgrades = new List<PlayerUpgrade>();
             for (int i = 1; i < 5; i++)

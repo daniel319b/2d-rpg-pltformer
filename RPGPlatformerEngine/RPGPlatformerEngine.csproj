@@ -74,9 +74,12 @@
     <Compile Include="Skills and Upgrades\PlayerUpgrade.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\Control.cs" />
+    <Compile Include="UI\InventoryWindow.cs" />
     <Compile Include="UI\Label.cs" />
-    <Compile Include="UI\PlayerUpgradesWindow.cs" />
+    <Compile Include="UI\SkillsWindow.cs" />
+    <Compile Include="UI\UpgradesWindow.cs" />
     <Compile Include="UI\Window.cs" />
+    <Compile Include="UI\WindowManager.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\Font.cs" />
     <Compile Include="Utilities\Input.cs" />

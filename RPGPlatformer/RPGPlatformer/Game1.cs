@@ -22,7 +22,7 @@ namespace RPGPlatformer
 
         Map map;
         Session session;
-        RPGPlatformerEngine.UI.PlayerUpgradesWindow window;
+       
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -59,7 +59,6 @@ namespace RPGPlatformer
 
             map = Content.Load<Map>("map2");    
             session = new Session(map);
-            window = new RPGPlatformerEngine.UI.PlayerUpgradesWindow(new Vector2(100), TextureManager.SetTexture("form"));
         }
 
         /// <summary>
@@ -83,7 +82,7 @@ namespace RPGPlatformer
                 this.Exit();
 
             session.Update(gameTime);
-            window.Update();
+        
             base.Update(gameTime);
         }
 
@@ -94,13 +93,9 @@ namespace RPGPlatformer
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-           
             
             session.Draw(spriteBatch);
-            spriteBatch.Begin();
-            window.Draw(spriteBatch);
-            spriteBatch.End();
+            
             base.Draw(gameTime);
         }
     }
