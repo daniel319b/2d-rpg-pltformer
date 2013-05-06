@@ -68,6 +68,10 @@ namespace RPGPlatformerEngine
             mouseState = Mouse.GetState();
             MousePosition = new Vector2(mouseState.X, mouseState.Y);
             mouseRectangle  =  new Rectangle ((int)MousePosition.X,(int)MousePosition.Y,10,10);
+
+            //Update Actions
+            InputActions.Update();
+            
         }
         #endregion
 

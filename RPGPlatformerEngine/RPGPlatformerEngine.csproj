@@ -82,6 +82,7 @@
     <Compile Include="UI\WindowManager.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\Font.cs" />
+    <Compile Include="Utilities\GlobalInputActions.cs" />
     <Compile Include="Utilities\Input.cs" />
     <Compile Include="Utilities\TextureManager.cs" />
     <Compile Include="Weapons\Bullet.cs" />

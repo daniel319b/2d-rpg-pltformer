@@ -23,6 +23,8 @@ namespace RPGPlatformerEngine
         public Player(Texture2D tex, Vector2 pos,Map map):base(pos,tex)
         {
             Map = map;
+            CurrentStatistics = new PlayerStatistics();
+            
         }
 
         public void Update(GameTime gameTime)

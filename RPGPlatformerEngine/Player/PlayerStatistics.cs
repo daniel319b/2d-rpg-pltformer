@@ -19,6 +19,13 @@ namespace RPGPlatformerEngine
 
         public int UpgradePoints { get; set; }
 
-      
+        public PlayerStatistics()
+        {
+            Level = 1;
+            Health = MaxHealth = 100;
+            ExperiencePoints = 0;
+            XPMultiplier = 1;
+            UpgradePoints = 0;
+        }
     }
 }

@@ -23,7 +23,6 @@ namespace RPGPlatformerEngine.UI
 
         public static void InitializeWindows()
         {
-            
             foreach (string name in Enum.GetNames(typeof(Windows)))
             {
                 string windowName = "RPGPlatformerEngine.UI." + name + "Window";
@@ -36,12 +35,18 @@ namespace RPGPlatformerEngine.UI
  
         }
 
-        public static void Show(Windows window)
+        public static void ToggleShow(Windows window)
         {
             //Show Window Logic here.
             string windowName = Enum.GetName(typeof(Windows), window);
             Window win = windows[windowName];
-            win.Enabled = true;
+            win.Enabled = win.Enabled ? false : true;
+        }
+
+        public static Window GetWindow(Windows window)
+        {
+            string windowName = Enum.GetName(typeof(Windows), window);
+            return windows[windowName];
         }
 
         public static void Update()
