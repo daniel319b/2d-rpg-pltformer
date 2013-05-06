@@ -27,8 +27,7 @@ namespace RPGPlatformerEngine.UI
             {
                 string windowName = "RPGPlatformerEngine.UI." + name + "Window";
                 Type t = Type.GetType(windowName);
-                ConstructorInfo c = t.GetConstructor(new Type[0]);
-                object obj = c.Invoke(new object[0]);
+                object obj = Activator.CreateInstance(t);
                 Window window = obj as Window;
                 windows[name] = window;
             }
