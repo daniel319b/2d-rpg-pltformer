@@ -17,7 +17,6 @@ namespace RPGPlatformerEngine
     {
         #region Fields and Properties
 
-        
         protected Vector2 position;
         protected Vector2 origin, velocity;
         protected Texture2D texture;
@@ -81,8 +80,8 @@ namespace RPGPlatformerEngine
         }
 
         /// <summary>
-        /// Color defaulted to White.  The Color property uses the Alpha property
-        /// to automatically use the opacity.
+        /// The color of the object.
+        /// it uses the opacity to make the object transparent.
         /// </summary>
         [ContentSerializerIgnore]
         public Color Color
@@ -126,7 +125,14 @@ namespace RPGPlatformerEngine
             get { return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); }
         }
 
-        
+        /// <summary>
+        /// The center of the texture of the game object.
+        /// </summary>
+        [ContentSerializerIgnore]
+        public Vector2 Center
+        {
+            get { return new Vector2(boundBox.Center.X, boundBox.Center.Y); }
+        }
 
         /// <summary>
         /// The rotation of the object - where the object is looking.
@@ -188,8 +194,8 @@ namespace RPGPlatformerEngine
         {
             if(texture != null)
                 origin = new Vector2(texture.Width / 2.0f, texture.Height / 2.0f);
-           // CalculateMatrix();
-           // CalculateBoundingRectangle();
+            CalculateMatrix();
+            CalculateBoundingRectangle();
             
         }
 
@@ -247,9 +253,9 @@ namespace RPGPlatformerEngine
              //   sb.Begin();
                 if (texture != null)
                     sb.Draw(texture, position, null, Color, rotation, origin, scale, SpriteEffects.None, 0.0f);
-                else
-                    sb.DrawString(Font.Regular, text, position, Color);
-               // sb.End();
+               // else
+               //     sb.DrawString(Font.Regular, text, position, Color);
+               //// sb.End();
             }
         }
 
@@ -265,8 +271,8 @@ namespace RPGPlatformerEngine
                 sb.Begin(SpriteSortMode.Deferred, null, null, null, null, null, transform);
                 if (texture != null)
                     sb.Draw(texture, position, null, Color, rotation, origin, scale, SpriteEffects.None, 0.0f);
-             //   else
-              //      sb.DrawString(Font.Regular, text, position, Color);
+                else
+                    sb.DrawString(Font.Regular, text, position, Color);
                 sb.End();
             }
         }

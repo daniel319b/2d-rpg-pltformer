@@ -15,6 +15,11 @@ namespace RPGPlatformerEngine.UI
 
         public bool Enabled { get; set; }
 
+        public Window(Vector2 position)
+            : base(position)
+        {
+            Controls = new List<Control>();
+        }
         public Window(Vector2 position,Texture2D texture) : base(position,texture)
         {
             Controls = new List<Control>();

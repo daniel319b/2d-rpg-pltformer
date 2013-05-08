@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace RPGPlatformerEngine
 {
-    class InventoryBlock : GameObject
+    public class InventoryBlock : GameObject
     {
         /// <summary>
         /// Determines if the inventory block has an item in it.
@@ -17,12 +17,12 @@ namespace RPGPlatformerEngine
             get { return item != null; }
         }
 
-        Item item;
+        InventoryItem item;
 
         /// <summary>
         /// The item in this block.
         /// </summary>
-        public Item Item
+        public InventoryItem Item
         {
             get { return item; }
             set { item = value; }

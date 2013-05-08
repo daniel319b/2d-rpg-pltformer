@@ -18,13 +18,16 @@ namespace RPGPlatformerEngine
 
         public PlayerStatistics CurrentStatistics { get; private set; }
 
+        public Inventory Inventory { get; private set; }
+
         bool isOnGround;
 
         public Player(Texture2D tex, Vector2 pos,Map map):base(pos,tex)
         {
             Map = map;
             CurrentStatistics = new PlayerStatistics();
-            
+            Inventory = new Inventory(new Vector2(10), 4, 4);
+            Inventory.AddItem(new InventoryItem("Sword"), 4);
         }
 
         public void Update(GameTime gameTime)

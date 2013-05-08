@@ -13,7 +13,7 @@ namespace RPGPlatformerEngine
     /// Calls their Update and Draw methods, and manages their relationship.
     /// It manages the items that are in the inventories,how to move them,stack them, etc..
     /// </summary>
-    class InventoryManager
+    public class InventoryManager
     {
         List<Inventory> inventories;
 
@@ -30,7 +30,7 @@ namespace RPGPlatformerEngine
         /// List of all the inventory blocks in the world.
         /// </summary>
         List<InventoryBlock> WorldBlocks;
-        Item MouseItem;
+        InventoryItem MouseItem;
         ConfirmBox throwConfirm;
         /// <summary>
         /// Initializes a new Inventory manager.
@@ -127,7 +127,7 @@ namespace RPGPlatformerEngine
                 {
                     if (MouseItem == null && !Input.KeyDown(Keys.LeftShift))
                     {
-                        MouseItem = new Item(b.Item);
+                        MouseItem = new InventoryItem(b.Item);
                         MouseItem.Quantity = b.Item.Quantity;
                         b.Item = null;
                     }  
@@ -140,8 +140,8 @@ namespace RPGPlatformerEngine
                         }
                         else//the items are not the same, so swap them.
                         {
-                            Item temp = new Item(MouseItem); temp.Quantity = MouseItem.Quantity;
-                            MouseItem = new Item(b.Item); MouseItem.Quantity = b.Item.Quantity;
+                            InventoryItem temp = new InventoryItem(MouseItem); temp.Quantity = MouseItem.Quantity;
+                            MouseItem = new InventoryItem(b.Item); MouseItem.Quantity = b.Item.Quantity;
                             temp.Position = b.Center;//avoiding bugs....
                             b.Item = temp;
                         }
@@ -166,7 +166,7 @@ namespace RPGPlatformerEngine
                 {
                     if (MouseItem == null)//if we are not holding anything
                     {
-                        MouseItem = new Item(b.Item);
+                        MouseItem = new InventoryItem(b.Item);
                         MouseItem.Quantity = b.Item.Quantity / 2;
                         if (MouseItem.Quantity < 1)
                             MouseItem.Quantity = 1;
@@ -180,7 +180,7 @@ namespace RPGPlatformerEngine
                 }
                 else if (!b.HasItem && MouseItem != null)
                 {
-                    b.Item = new Item(MouseItem);
+                    b.Item = new InventoryItem(MouseItem);
                     b.Item.Position = b.Center;
                     MouseItem.Quantity--;
                 }

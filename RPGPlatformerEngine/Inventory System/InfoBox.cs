@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RPGPlatformerEngine
 {
-    class InfoBox 
+    public class InfoBox 
     {
         /// <summary>
         /// The position of the box.

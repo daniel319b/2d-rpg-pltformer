@@ -11,7 +11,7 @@ namespace RPGPlatformerEngine
     /// <summary>
     /// This class implements a basic Inventory window.
     /// </summary>
-    class Inventory
+    public class Inventory
     {         
         /// <summary>
         /// The number of rows in the inventory.
@@ -84,7 +84,7 @@ namespace RPGPlatformerEngine
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <param name="position">The block position to add the item.</param>
-        public void AddItem(Item item,int position)
+        public void AddItem(InventoryItem item,int position)
         {
             if (position >= blocks.Length || position < 0)//check for errors in the input.
                 return;

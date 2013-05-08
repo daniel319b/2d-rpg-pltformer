@@ -8,7 +8,7 @@ using RPGPlatformerEngine.UI;
 
 namespace RPGPlatformerEngine
 {
-    class ConfirmBox : GameObject
+    public class ConfirmBox : GameObject
     {
         public Button Yes, No;
         string title;
@@ -18,10 +18,18 @@ namespace RPGPlatformerEngine
             texture = TextureManager.SetTexture("ConfirmBox");
             title = text;
             boundBox = new Rectangle((int)position.X,(int) position.Y, texture.Width, texture.Height);
-            Yes = new Button("Yes");
-            Yes.Position = new Vector2(position.X, boundBox.Bottom - Yes.Texture.Height - 10);
-            No = new Button("No");
-            No.Position = new Vector2((Yes.Position.X + Yes.Texture.Width ) + 10, boundBox.Bottom - No.Texture.Height - 10);
+            Yes = new Button()
+            {
+                Text = "Yes",
+                Position = new Vector2(position.X, boundBox.Bottom - Yes.Texture.Height - 10)
+            };
+
+            No = new Button()
+            {
+                Text = "No",
+                Position = new Vector2((Yes.Position.X + Yes.Texture.Width ) + 10, boundBox.Bottom - No.Texture.Height - 10)
+            };
+
             Color = Color.Yellow;
         }
 

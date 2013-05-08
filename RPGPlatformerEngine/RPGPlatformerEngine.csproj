@@ -64,6 +64,15 @@
     <Compile Include="Enemies\Enemy.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameSetting.cs" />
+    <Compile Include="Inventory System\ConfirmBox.cs" />
+    <Compile Include="Inventory System\InfoBox.cs" />
+    <Compile Include="Inventory System\Inventory.cs" />
+    <Compile Include="Inventory System\InventoryBlock.cs" />
+    <Compile Include="Inventory System\InventoryManager.cs" />
+    <Compile Include="Inventory System\InventoryItem.cs" />
+    <Compile Include="Inventory System\Item.cs" />
+    <Compile Include="Inventory System\Potion.cs" />
+    <Compile Include="Inventory System\WeaponItem.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Map\TileMap.cs" />
     <Compile Include="Map\Tile.cs" />
@@ -91,9 +100,7 @@
     <Compile Include="Weapons\Pistol.cs" />
     <Compile Include="Weapons\Weapon.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Inventory System\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

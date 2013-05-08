@@ -51,14 +51,16 @@ namespace RPGPlatformerEngine.UI
         public static void Update()
         {
             foreach (Window w in windows.Values)
-                w.Update();
+                if(w.Enabled)
+                    w.Update();
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
             foreach (Window w in windows.Values)
-                w.Draw(spriteBatch);
+                if (w.Enabled)
+                    w.Draw(spriteBatch);
             spriteBatch.End();
         }
     }
