@@ -27,7 +27,7 @@ namespace RPGPlatformerEngine.UI
         /// The texture of the control.
         /// </summary>
         public Texture2D Texture { get; set; }
-
+        
         /// <summary>
         /// The Bounding Rectagle of the control.
         /// </summary>

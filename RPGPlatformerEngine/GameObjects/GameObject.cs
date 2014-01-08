@@ -192,10 +192,14 @@ namespace RPGPlatformerEngine
         /// </summary>
         public virtual void Update()
         {
-            if(texture != null)
-                origin = new Vector2(texture.Width / 2.0f, texture.Height / 2.0f);
-            CalculateMatrix();
-            CalculateBoundingRectangle();
+            if (texture != null)
+            {
+               
+                boundBox = new Rectangle((int)(position.X - origin.X), (int)(position.Y - origin.Y), texture.Width, texture.Height);
+                //origin = new Vector2(texture.Width / 2.0f, texture.Height / 2.0f);
+            }
+            //CalculateMatrix();
+            //CalculateBoundingRectangle();
             
         }
 
@@ -252,10 +256,15 @@ namespace RPGPlatformerEngine
             {               
              //   sb.Begin();
                 if (texture != null)
+                {
                     sb.Draw(texture, position, null, Color, rotation, origin, scale, SpriteEffects.None, 0.0f);
-               // else
+                    var t = TextureManager.SetTexture("square_border");
+                    sb.Draw(t, BoundBox, Color.White);
+                }
+                // else
                //     sb.DrawString(Font.Regular, text, position, Color);
                //// sb.End();
+               
             }
         }
 

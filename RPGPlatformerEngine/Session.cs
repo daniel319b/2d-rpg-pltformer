@@ -40,9 +40,9 @@ namespace RPGPlatformerEngine
         /// <param name="gameTime">A GameTime Object</param>
         public void Update(GameTime gameTime)
         {
+            Input.Update();
             CurrentMap.Update(gameTime);
             UI.WindowManager.Update();
-            Input.Update();
         }
 
         /// <summary>

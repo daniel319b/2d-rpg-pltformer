@@ -24,9 +24,10 @@ namespace RPGPlatformerEngine
         /// </summary>
         public string Text
         {
-            get { return textObject.Text; }
+            get { return textLabel.Text; }
         }
-         GameObject textObject;
+
+         UI.Label textLabel;
      
         /// <summary>
         /// Creates an new info box in a specific position and with a specific text in it.
@@ -36,29 +37,28 @@ namespace RPGPlatformerEngine
          public InfoBox(Vector2 pos, string text)
          {
              Position = pos;
-             textObject = new GameObject();
-             textObject.Text = text;
+             textLabel = new UI.Label();
+             textLabel.Text = text;
+             textLabel.Color = Color.White;
              Bounds = new Rectangle((int)Position.X, (int)Position.Y, (int)Font.Regular.MeasureString(text).X+10, (int)Font.Regular.MeasureString(text).Y+5);
          }
 
          public void Update()
          {      
-             textObject.Position = new Vector2(Bounds.X+5, Bounds.Y) ;
-             textObject.Update();
+             textLabel.Position = new Vector2(Bounds.X+5, Bounds.Y) ;
          }
-
 
          public void Draw(SpriteBatch sb)
          {
-             sb.Begin();
+             //sb.Begin();
              sb.Draw(Texture, Bounds,Color.White);
-             sb.End();
-             textObject.Draw(sb);
+             //sb.End();
+             textLabel.Draw(sb);
          }
 
         /// <summary>
         /// The background texture for the info box.
         /// </summary>
-        public static Texture2D Texture { get; set; }
+         public static Texture2D Texture { get { return TextureManager.SetTexture("infoBox"); } }
     }
 }

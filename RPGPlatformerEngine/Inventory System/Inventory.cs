@@ -100,12 +100,18 @@ namespace RPGPlatformerEngine
         {
             if (ShowWindow)
             {
-                foreach (InventoryBlock b in blocks)
+                for (int i = 0; i < rows; i++)
                 {
-                    b.Update();
-                    if (b.IsLeftClicked() && b.HasItem)                        
-                        if (Input.KeyDown(Keys.LeftShift))                       
-                           GatherSimilarItems(b);
+                    for (int j = 0; j < columns; j++)
+                    {
+                        InventoryBlock b = blocks[i, j];
+                        b.Position = new Vector2(position.X + Block.Width * j, position.Y + Block.Height * i);
+                          
+                        b.Update();
+                        if (b.IsLeftClicked() && b.HasItem)
+                            if (Input.KeyDown(Keys.LeftShift))
+                                GatherSimilarItems(b);
+                    }
                 }         
             }
         }

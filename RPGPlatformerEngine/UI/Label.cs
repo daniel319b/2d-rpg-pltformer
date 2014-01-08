@@ -11,8 +11,14 @@ namespace RPGPlatformerEngine.UI
     /// </summary>
     public class Label : Control
     {
+        /// <summary>
+        /// The text of the label
+        /// </summary>
         public string Text { get; set; }
 
+        /// <summary>
+        /// The Bounding Rectangle of the label.
+        /// </summary>
         public override Rectangle BoundBox
         {
             get
@@ -21,16 +27,22 @@ namespace RPGPlatformerEngine.UI
             }
         }
 
-        public Label()
-        {
-            Color = Color.Black;
-            Text = "";
-        }
+
+        /// <summary>
+        /// Creates a new Label object
+        /// </summary>
+        public Label() : this(Vector2.Zero, "") { }
+
+        /// <summary>
+        /// Creates a new Label object with a given position and a name.
+        /// </summary>
+        /// <param name="position">The position in the screen of the label.</param>
+        /// <param name="text">The text of the label.</param>
         public Label(Vector2 position, string text)
             : base(position)
         {
             Text = text;
-            Color = Color.Black;
+            Color = DefautLabelColor;
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
@@ -42,5 +54,8 @@ namespace RPGPlatformerEngine.UI
         {
             return Text;
         }
+
+
+        public static Color DefautLabelColor { get { return Color.Black; } }
     }
 }

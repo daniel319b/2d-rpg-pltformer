@@ -69,7 +69,7 @@ namespace RPGPlatformerEngine
 
             if (MouseItem != null)
             {
-                MouseItem.Position = new Vector2(Input.MousePosition.X, Input.MousePosition.Y);
+                MouseItem.Position = new Vector2(Input.MousePosition.X - MouseItem.Texture.Width / 2.0f, Input.MousePosition.Y - MouseItem.Texture.Height / 2.0f);
                 MouseItem.Update();
                 MouseItem.Scale = 0.9f;
             }       
@@ -204,9 +204,9 @@ namespace RPGPlatformerEngine
                 MouseItem.Draw(sb);
                 if (MouseItem.Quantity >= 2)
                 {
-                    sb.Begin();
+                    //sb.Begin();
                     sb.DrawString(Font.Regular, MouseItem.Quantity + "", new Vector2(MouseItem.BoundBox.Right, MouseItem.BoundBox.Top), Color.White);
-                    sb.End();
+                    //sb.End();
                 }
             }
             if (throwConfirm != null)

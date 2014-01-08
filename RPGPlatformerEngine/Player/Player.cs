@@ -26,8 +26,10 @@ namespace RPGPlatformerEngine
         {
             Map = map;
             CurrentStatistics = new PlayerStatistics();
-            Inventory = new Inventory(new Vector2(10), 4, 4);
+            Inventory = new Inventory(new Vector2(10), 7, 7);
             Inventory.AddItem(new InventoryItem("Sword"), 4);
+            Inventory.AddItem(new InventoryItem("Sword"), 5);
+            Inventory.AddItem(new InventoryItem("Sword"), 7);
         }
 
         public void Update(GameTime gameTime)

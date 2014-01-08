@@ -10,7 +10,7 @@ namespace RPGPlatformerEngine
     /// <summary>
     /// This class represents an Item.
     /// </summary>
-    public class InventoryItem : GameObject , Item
+    public class InventoryItem : GameObject
     {  
         int quantity = 1;
         string name = "";
@@ -33,6 +33,8 @@ namespace RPGPlatformerEngine
             set { quantity = value; }
         }
 
+
+        
         /// <summary>
         /// Create a new item object.
         /// </summary>
@@ -67,6 +69,7 @@ namespace RPGPlatformerEngine
 
         public override void Update()
         {
+            this.origin = Vector2.Zero;
             base.Update();   
            
             if (Hover())

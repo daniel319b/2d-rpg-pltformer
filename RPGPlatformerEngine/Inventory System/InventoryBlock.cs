@@ -40,7 +40,8 @@ namespace RPGPlatformerEngine
         /// <param name="position">The position of the block.</param>
         public InventoryBlock(Vector2 position):base(position)
         {
-            texture = Inventory.Block;      
+            texture = Inventory.Block;
+            origin = Vector2.Zero;
         }
 
         public override void Update()
@@ -50,7 +51,7 @@ namespace RPGPlatformerEngine
             boundBox = new Rectangle((int)(position.X - origin.X), (int)(position.Y - origin.Y), texture.Width-10, texture.Height-10);
             if (HasItem)
             {          
-                item.Position = new Vector2(boundBox.Center.X, boundBox.Center.Y);              
+                item.Position = new Vector2(Position.X, Position.Y);              
                 item.Update();
             }
             if (Hovering())
@@ -76,11 +77,17 @@ namespace RPGPlatformerEngine
             if (item != null)
             {
                 item.Draw(sb);
-                Vector2 numberSize = Font.Regular.MeasureString(item.Quantity.ToString());
-                GameObject number = new GameObject(new Vector2(boundBox.Right- numberSize.X+6, boundBox.Bottom- numberSize.Y+6));
-                number.Text = item.Quantity.ToString();
+                
+                //GameObject number = new GameObject(new Vector2(boundBox.Right- numberSize.X+6, boundBox.Bottom- numberSize.Y+6));
+                //number.Text = item.Quantity.ToString();
                 if (item.Quantity >= 2)
-                    number.Draw(sb);
+                {
+                    Vector2 numberSize = Font.Regular.MeasureString(item.Quantity.ToString());
+                    UI.Label numberLabel = new UI.Label(new Vector2(boundBox.Right - numberSize.X + 6, boundBox.Bottom - numberSize.Y + 6), item.Quantity.ToString());
+                    numberLabel.Color = Color.White;
+                    numberLabel.Draw(sb);
+
+                }
             }
            
         }

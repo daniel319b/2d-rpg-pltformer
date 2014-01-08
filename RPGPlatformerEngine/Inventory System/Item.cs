@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPGPlatformerEngine
 {
-    public interface Item
+    public class Item
     {
         /// <summary>
         /// The name of the item.

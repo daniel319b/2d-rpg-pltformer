@@ -12,23 +12,27 @@ namespace RPGPlatformerEngine.UI
         Player player;
         Inventory inventory;
 
-        public InventoryWindow() : base(new Vector2(10), TextureManager.SetTexture("form"))
+        InventoryManager inventoryManager;
+
+        public InventoryWindow() : base (new Vector2(10), TextureManager.SetTexture("form"))
         {
             player = Session.Singleton.Player;
             inventory = player.Inventory;
+            inventoryManager = new InventoryManager();
+            inventoryManager.AddInventory(inventory);
         }
 
         public override void Update()
         {
             base.Update();
-            inventory.Update();
-            inventory.Position = Position;
+            inventoryManager.Update();
+            inventory.Position = Position + new Vector2(5, 35) ;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            inventory.Draw(spriteBatch);
+            inventoryManager.Draw(spriteBatch);
         }
     }
 }
