@@ -55,6 +55,9 @@ namespace RPGPlatformerEngine
             }
         }
 
+        /// <summary>
+        /// If true, shows the window, false otherwise.
+        /// </summary>
         public bool ShowWindow
         {
             get;
@@ -75,8 +78,14 @@ namespace RPGPlatformerEngine
             blocks = new InventoryBlock[rows, columns];
             for (int i = 0; i < rows; i++)           
                 for (int j = 0; j < columns; j++)
-                    blocks[i, j] = new InventoryBlock(new Vector2(position.X + Block.Width * j, position.Y + Block.Height * i));
+                    blocks[i, j] = new InventoryBlock(this,new Vector2(position.X + Block.Width * j, position.Y + Block.Height * i));
             ShowWindow = true;
+        }
+
+
+        public void AddItem(InventoryItem inventoryItem)
+        {
+            AddItem(inventoryItem, getFirstFreeBlock());
         }
 
         /// <summary>
@@ -96,6 +105,9 @@ namespace RPGPlatformerEngine
             blocks[posX, posY].Item = item;
         }
 
+        /// <summary>
+        /// Updates the inventory - updates blocks objects.
+        /// </summary>
         public void Update()
         {
             if (ShowWindow)
@@ -104,13 +116,8 @@ namespace RPGPlatformerEngine
                 {
                     for (int j = 0; j < columns; j++)
                     {
-                        InventoryBlock b = blocks[i, j];
-                        b.Position = new Vector2(position.X + Block.Width * j, position.Y + Block.Height * i);
-                          
-                        b.Update();
-                        if (b.IsLeftClicked() && b.HasItem)
-                            if (Input.KeyDown(Keys.LeftShift))
-                                GatherSimilarItems(b);
+                        blocks[i, j].Position = new Vector2(position.X + Block.Width * j, position.Y + Block.Height * i);
+                        blocks[i, j].Update();
                     }
                 }         
             }
@@ -120,7 +127,7 @@ namespace RPGPlatformerEngine
         /// Gathers all the items which are the same as in the given block, and placed in that block.
         /// </summary>
         /// <param name="b">The block that the items of the same kind will be gathered to.</param>
-        private void GatherSimilarItems(InventoryBlock b)
+        public void GatherSimilarItems(InventoryBlock b)
         {
             foreach (InventoryBlock block in blocks)
             {
@@ -144,6 +151,7 @@ namespace RPGPlatformerEngine
                 foreach (InventoryBlock block in blocks)
                     block.Draw(sb);
 
+                //needs to be done in a seperate loop to avoid block overlapping with infobox.
                 foreach (InventoryBlock block in blocks)
                     if (block.itemInfoBox != null)
                         block.itemInfoBox.Draw(sb);

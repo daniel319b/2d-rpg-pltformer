@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace RPGPlatformerEngine
 {
     /// <summary>
-    /// 
+    /// Holds global variables and methods for the current game session.
     /// </summary>
     public class Session
     {
@@ -24,6 +24,7 @@ namespace RPGPlatformerEngine
 
         public static Session Singleton { get; private set; }
 
+        HealthPotion potion;
         public Session(Map map)
         {
             CurrentMap = map;
@@ -32,6 +33,7 @@ namespace RPGPlatformerEngine
             Singleton = this;
             CurrentMap.Enemies.Add(new Enemy() { Texture = TextureManager.SetTexture("square"), Position = new Vector2(862, 595) });
             UI.WindowManager.InitializeWindows();
+          
         }
 
         /// <summary>

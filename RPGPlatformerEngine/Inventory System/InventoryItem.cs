@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace RPGPlatformerEngine
 {
     /// <summary>
-    /// This class represents an Item.
+    /// This class represents an item icon in the inventory.
     /// </summary>
     public class InventoryItem : GameObject
     {  
@@ -32,9 +32,7 @@ namespace RPGPlatformerEngine
             get { return quantity; }
             set { quantity = value; }
         }
-
-
-        
+    
         /// <summary>
         /// Create a new item object.
         /// </summary>
@@ -42,8 +40,7 @@ namespace RPGPlatformerEngine
         public InventoryItem(string itemName)
         {
             Name = itemName;
-            
-            texture = TextureManager.SetTexture("Items/"+itemName);
+            texture = TextureManager.SetTexture("Items/" + itemName);
         }
 
         /// <summary>
@@ -54,7 +51,7 @@ namespace RPGPlatformerEngine
         public InventoryItem(string itemName,Texture2D itemTexture)
         {       
             name = itemName;
-           // texture = itemTexture;
+            texture = itemTexture;
         }
 
         /// <summary>
@@ -67,9 +64,11 @@ namespace RPGPlatformerEngine
             texture = other.Texture;             
         }
 
+        /// <summary>
+        /// Updates the inventory item.
+        /// </summary>
         public override void Update()
         {
-            this.origin = Vector2.Zero;
             base.Update();   
            
             if (Hover())
@@ -105,10 +104,6 @@ namespace RPGPlatformerEngine
         {
             return Input.MouseRectangle.Intersects(BoundBox);
         }
-
-
-        
-
         
     }
 }

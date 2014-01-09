@@ -57,7 +57,7 @@ namespace RPGPlatformerEngine
         /// The current texture of the object.
         /// </summary>
         [ContentSerializerIgnore]
-        public Texture2D Texture
+        public virtual Texture2D Texture
         {
             get { return texture; }
             set { texture = value; TextureName = texture.Name; }
@@ -255,11 +255,11 @@ namespace RPGPlatformerEngine
             if (Alive)
             {               
              //   sb.Begin();
-                if (texture != null)
+                if (Texture != null)
                 {
-                    sb.Draw(texture, position, null, Color, rotation, origin, scale, SpriteEffects.None, 0.0f);
-                    var t = TextureManager.SetTexture("square_border");
-                    sb.Draw(t, BoundBox, Color.White);
+                    sb.Draw(Texture, Position, null, Color, Rotation, Origin, Scale, SpriteEffects.None, 0.0f);
+                   // var t = TextureManager.SetTexture("square_border");
+                    //sb.Draw(t, BoundBox, Color.White);
                 }
                 // else
                //     sb.DrawString(Font.Regular, text, position, Color);

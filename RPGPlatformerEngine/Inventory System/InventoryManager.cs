@@ -30,6 +30,7 @@ namespace RPGPlatformerEngine
         /// List of all the inventory blocks in the world.
         /// </summary>
         List<InventoryBlock> WorldBlocks;
+
         InventoryItem MouseItem;
         ConfirmBox throwConfirm;
         /// <summary>
@@ -105,7 +106,6 @@ namespace RPGPlatformerEngine
                 MouseItem = null;
           
             throwConfirm = null;//delete the message.
-           
         }
 
         void No_Clicked(object sender, EventArgs e)
@@ -125,6 +125,10 @@ namespace RPGPlatformerEngine
                 #region Left Clicked
                 if (b.HasItem)//if the block is not empty
                 {
+                    if (MouseItem == null && Input.KeyDown(Keys.LeftShift))
+                    {
+                        b.Inventory.GatherSimilarItems(b);
+                    }
                     if (MouseItem == null && !Input.KeyDown(Keys.LeftShift))
                     {
                         MouseItem = new InventoryItem(b.Item);

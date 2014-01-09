@@ -29,19 +29,25 @@ namespace RPGPlatformerEngine
         }
 
         /// <summary>
+        /// The inventory this Block belongs to.
+        /// </summary>
+        public Inventory Inventory { get; private set; }
+
+        /// <summary>
         /// The info box which pops when the user hovers over the block.
         /// Displays the name of the item.
         /// </summary>
-        public  InfoBox itemInfoBox;
+        public InfoBox itemInfoBox;
 
+        
         /// <summary>
         /// Constructs a new Inventory block.
         /// </summary>
         /// <param name="position">The position of the block.</param>
-        public InventoryBlock(Vector2 position):base(position)
+        public InventoryBlock(Inventory i, Vector2 position):base(position)
         {
             texture = Inventory.Block;
-            origin = Vector2.Zero;
+            Inventory = i;
         }
 
         public override void Update()
@@ -50,8 +56,8 @@ namespace RPGPlatformerEngine
             //to avoid bugs, we make the boundBox a little smaller, for better Intersction.
             boundBox = new Rectangle((int)(position.X - origin.X), (int)(position.Y - origin.Y), texture.Width-10, texture.Height-10);
             if (HasItem)
-            {          
-                item.Position = new Vector2(Position.X, Position.Y);              
+            {
+                item.Position = new Vector2(Position.X + (Texture.Width - item.Texture.Width)/2, Position.Y + (Texture.Height - item.Texture.Height)/2);              
                 item.Update();
             }
             if (Hovering())
@@ -62,7 +68,6 @@ namespace RPGPlatformerEngine
                     itemInfoBox = new InfoBox(new Vector2 (boundBox.Right,boundBox.Top), item.Name);
                     itemInfoBox.Update();
                 }
-               
             }
             else
             {
@@ -77,16 +82,12 @@ namespace RPGPlatformerEngine
             if (item != null)
             {
                 item.Draw(sb);
-                
-                //GameObject number = new GameObject(new Vector2(boundBox.Right- numberSize.X+6, boundBox.Bottom- numberSize.Y+6));
-                //number.Text = item.Quantity.ToString();
                 if (item.Quantity >= 2)
                 {
                     Vector2 numberSize = Font.Regular.MeasureString(item.Quantity.ToString());
                     UI.Label numberLabel = new UI.Label(new Vector2(boundBox.Right - numberSize.X + 6, boundBox.Bottom - numberSize.Y + 6), item.Quantity.ToString());
                     numberLabel.Color = Color.White;
                     numberLabel.Draw(sb);
-
                 }
             }
            
@@ -118,7 +119,6 @@ namespace RPGPlatformerEngine
         {
             return Hovering() && Input.RightButtonPressed();
         }
-
         
     }
 }
