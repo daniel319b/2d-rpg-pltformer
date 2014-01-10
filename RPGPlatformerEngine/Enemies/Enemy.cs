@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RPGPlatformerEngine
 {
@@ -27,25 +28,40 @@ namespace RPGPlatformerEngine
         float attackTime;
         private bool changedDirection;
 
+        public Animation Animation { get; set; }
+
         public Enemy()
         {
-            velocity = new Vector2(-3, 0);
+            velocity = new Vector2(-1.5f, 0);
+            
         }
 
         public void Update(GameTime gameTime,Player player)
         {
             base.Update();
             position += velocity;
+
+            Animation.Position = Position;
+            Animation.Update(gameTime);
+           
             UpdateMovement();
             PlayerCollision(gameTime,player);
+            
         }
 
+        public override void Draw(SpriteBatch sb)
+        {
+            base.Draw(sb);
+            var effect = velocity.X < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Animation.Draw(sb, effect);
+        }
         /// <summary>
         /// Update the movement of the enemy
         /// </summary>
         private void UpdateMovement()
         {
             Map map = Session.Singleton.CurrentMap;
+            Rectangle BoundBox = new Rectangle((int)Position.X, (int)Position.Y, Animation.CurrentFrameRect.Width, Animation.CurrentFrameRect.Height);
             int leftTile = (int)Math.Floor((float)BoundBox.Left / Tile.Width);
             int rightTile = (int)Math.Ceiling(((float)BoundBox.Right / Tile.Width)) - 1;
             if (map.GetTileCollision(leftTile, (int)Position.Y / Tile.Height) == TileCollision.Impassable || 
@@ -54,6 +70,7 @@ namespace RPGPlatformerEngine
               //  if (changedDirection == true) return;
                 velocity *= -1;// Vector2.Zero;
                 //changedDirection = true;
+                
             }
         }
 
@@ -64,6 +81,7 @@ namespace RPGPlatformerEngine
         /// <param name="player">The player of the game.</param>
         private void PlayerCollision(GameTime gameTime, Player player)
         {
+            Rectangle BoundBox = new Rectangle((int)Position.X, (int)Position.Y, Animation.CurrentFrameRect.Width, Animation.CurrentFrameRect.Height);
             if (BoundBox.Intersects(player.BoundBox))
                 AttackPlayer(gameTime, player);
         }
@@ -80,6 +98,7 @@ namespace RPGPlatformerEngine
             {
                 player.Hit(this);//attack the player.
                 attackTime = 0;//reset the time.
+                AttackRate = 1;
             }
         }
 

@@ -122,7 +122,7 @@ namespace RPGPlatformerEngine
             // get { return boundBox; }
             // protected set { boundBox = value; }
             protected set { boundBox = value; }
-            get { return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); }
+            get { return texture == null ? Rectangle.Empty : new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); }
         }
 
         /// <summary>
@@ -192,13 +192,13 @@ namespace RPGPlatformerEngine
         /// </summary>
         public virtual void Update()
         {
-            if (texture != null)
-            {
+            //if (texture != null)
+            //{
                
-                boundBox = new Rectangle((int)(position.X - origin.X), (int)(position.Y - origin.Y), texture.Width, texture.Height);
-                //origin = new Vector2(texture.Width / 2.0f, texture.Height / 2.0f);
-            }
-            //CalculateMatrix();
+            //    boundBox = new Rectangle((int)(Position.X), (int)(Position.Y), Texture.Width, Texture.Height);
+            //    //origin = new Vector2(texture.Width / 2.0f, texture.Height / 2.0f);
+            //}
+            ////CalculateMatrix();
             //CalculateBoundingRectangle();
             
         }

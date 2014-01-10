@@ -24,14 +24,15 @@ namespace RPGPlatformerEngine
 
         public static Session Singleton { get; private set; }
 
-        HealthPotion potion;
         public Session(Map map)
         {
             CurrentMap = map;
             Player = new Player(TextureManager.SetTexture("player"), new Vector2(100), map);
             CurrentMap.Player = Player;
             Singleton = this;
-            CurrentMap.Enemies.Add(new Enemy() { Texture = TextureManager.SetTexture("square"), Position = new Vector2(862, 595) });
+            CurrentMap.Enemies.Add(new Enemy() { Position = new Vector2(362, 595), Animation = new Animation(TextureManager.SetTexture("shroom_animation"), 1, 7, 10) });
+            CurrentMap.Enemies.Add(new Enemy() { Position = new Vector2(1062, 595), Animation = new Animation(TextureManager.SetTexture("red_snail"), 4, 1, 7), Velocity = new Vector2 (-0.8f,0)});
+            CurrentMap.Enemies.Add(new Enemy() { Position = new Vector2(862, 595), Animation = new Animation(TextureManager.SetTexture("shroom_animation"), 1, 7, 10) });
             UI.WindowManager.InitializeWindows();
           
         }
@@ -56,6 +57,7 @@ namespace RPGPlatformerEngine
             CurrentMap.Draw(spriteBatch);
             Player.Draw(spriteBatch);
             UI.WindowManager.Draw(spriteBatch);
+            HUD.Draw(spriteBatch);
         }
     }
 }

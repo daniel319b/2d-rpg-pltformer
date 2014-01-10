@@ -40,7 +40,7 @@ namespace RPGPlatformerEngine
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (!isOnGround)
                 Acceleration = new Vector2(0, 1400);
-
+           
             HandleInput();
             ApplyPhysics(time);
             HandleCollisions();
@@ -138,7 +138,8 @@ namespace RPGPlatformerEngine
         /// <param name="enemy">The enemy that hit the player.</param>
         public void Hit(Enemy enemy)
         {
-           
+            CurrentStatistics.Health -= 5;
+            //velocity = new Vector2(50 * enemy.Velocity.X, 300);
         }
     }
 }
