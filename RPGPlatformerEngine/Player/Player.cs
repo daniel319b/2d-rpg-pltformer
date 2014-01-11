@@ -8,6 +8,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RPGPlatformerEngine
 {
+    public enum HorizontalDirection
+    {
+        Left,
+        Right,
+    }
+
     public class Player : GameObject
     {
         public Vector2 Acceleration { get; private set; }
@@ -20,8 +26,11 @@ namespace RPGPlatformerEngine
 
         public Inventory Inventory { get; private set; }
 
+        public HorizontalDirection HorizontalDirection { get; set; }
+
         bool isOnGround;
 
+        RPGPlatformerEngine.Weapons.MeleeWeapon knife;
         public Player(Texture2D tex, Vector2 pos,Map map):base(pos,tex)
         {
             Map = map;
@@ -30,8 +39,7 @@ namespace RPGPlatformerEngine
             Inventory.AddItem(new InventoryItem("Sword"));
             Inventory.AddItem(new InventoryItem("Sword"));
             Inventory.AddItem(new InventoryItem("Sword"));
-            Inventory.AddItem(new InventoryItem("Potion"));
-            Inventory.AddItem(new InventoryItem("Potion"));
+            knife = new RPGPlatformerEngine.Weapons.MeleeWeapon(this);
         }
 
         public void Update(GameTime gameTime)
@@ -44,15 +52,21 @@ namespace RPGPlatformerEngine
             HandleInput();
             ApplyPhysics(time);
             HandleCollisions();
-           
+            knife.Update(gameTime);
         }
 
         private void HandleInput()
         {
             if (Input.KeyDown(Keys.D))
+            {
                 position.X += 2;
+                HorizontalDirection = RPGPlatformerEngine.HorizontalDirection.Right;
+            }
             if (Input.KeyDown(Keys.A))
+            {
                 position.X -= 2;
+                HorizontalDirection = RPGPlatformerEngine.HorizontalDirection.Left;
+            }
             if (Input.KeyPressed(Keys.W) && isOnGround)
             {
                 isOnGround = false;
@@ -130,16 +144,26 @@ namespace RPGPlatformerEngine
             sb.Begin();
             sb.Draw(texture, position, Color.White);
             sb.End();
+            knife.Draw(sb);
         }
 
         /// <summary>
         /// An enemy has hit the player!
         /// </summary>
         /// <param name="enemy">The enemy that hit the player.</param>
-        public void Hit(Enemy enemy)
+        public void OnHit(Enemy enemy)
         {
-            CurrentStatistics.Health -= 5;
+            //CurrentStatistics.Health -= 5;
             //velocity = new Vector2(50 * enemy.Velocity.X, 300);
+        }
+
+        /// <summary>
+        /// The player has killed an enemy!
+        /// </summary>
+        /// <param name="enemy">The enemy that was slain</param>
+        public void OnEnemyKill(Enemy enemy)
+        {
+            // updates stats, display a message..
         }
     }
 }

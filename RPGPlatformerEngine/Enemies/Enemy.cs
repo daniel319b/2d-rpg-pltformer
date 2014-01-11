@@ -24,7 +24,8 @@ namespace RPGPlatformerEngine
         /// </summary>
         public float AttackRate { get; private set; }
 
-        
+        new public Rectangle BoundBox { get; set; }
+
         float attackTime;
         private bool changedDirection;
 
@@ -40,6 +41,7 @@ namespace RPGPlatformerEngine
         {
             base.Update();
             position += velocity;
+            BoundBox = new Rectangle((int)Position.X, (int)Position.Y, Animation.CurrentFrameRect.Width, Animation.CurrentFrameRect.Height);
 
             Animation.Position = Position;
             Animation.Update(gameTime);
@@ -61,11 +63,10 @@ namespace RPGPlatformerEngine
         private void UpdateMovement()
         {
             Map map = Session.Singleton.CurrentMap;
-            Rectangle BoundBox = new Rectangle((int)Position.X, (int)Position.Y, Animation.CurrentFrameRect.Width, Animation.CurrentFrameRect.Height);
             int leftTile = (int)Math.Floor((float)BoundBox.Left / Tile.Width);
             int rightTile = (int)Math.Ceiling(((float)BoundBox.Right / Tile.Width)) - 1;
-            if (map.GetTileCollision(leftTile, (int)Position.Y / Tile.Height) == TileCollision.Impassable || 
-                map.GetTileCollision(rightTile+1, (int)Position.Y / Tile.Height) == TileCollision.Impassable)
+            if (map.GetTileCollision(leftTile, (int)Position.Y / Tile.Height) == TileCollision.Impassable ||
+                map.GetTileCollision(rightTile + 1, (int)Position.Y / Tile.Height) == TileCollision.Impassable)
             {
               //  if (changedDirection == true) return;
                 velocity *= -1;// Vector2.Zero;
@@ -81,7 +82,6 @@ namespace RPGPlatformerEngine
         /// <param name="player">The player of the game.</param>
         private void PlayerCollision(GameTime gameTime, Player player)
         {
-            Rectangle BoundBox = new Rectangle((int)Position.X, (int)Position.Y, Animation.CurrentFrameRect.Width, Animation.CurrentFrameRect.Height);
             if (BoundBox.Intersects(player.BoundBox))
                 AttackPlayer(gameTime, player);
         }
@@ -96,7 +96,7 @@ namespace RPGPlatformerEngine
             attackTime += (float)gameTime.ElapsedGameTime.TotalSeconds;//count the attack interval.
             if(attackTime > AttackRate)//if its time to attack, attack!
             {
-                player.Hit(this);//attack the player.
+                player.OnHit(this);//attack the player.
                 attackTime = 0;//reset the time.
                 AttackRate = 1;
             }
@@ -108,11 +108,12 @@ namespace RPGPlatformerEngine
         /// <param name="Owner">The owner of the bullet, the player.</param>
         public void Hit(int hitAmount, Player player)
         {
+            player.CurrentStatistics.Health -= 10;
             Health -= hitAmount;
             if (Health <= 0)
             {
                 alive = false;
-
+                player.OnEnemyKill(this);
             }
         }
     }

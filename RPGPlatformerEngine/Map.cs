@@ -25,9 +25,14 @@ namespace RPGPlatformerEngine
         {
             Enemies = new List<Enemy>();
             pickeableItems = new List<PickableItem>();
-            var potion = new HealthPotion();
-            potion.Position = new Vector2(300);
-            pickeableItems.Add(potion);
+            
+            pickeableItems.Add(new HealthPotion() { Position = new Vector2(250,350) });
+            pickeableItems.Add(new HealthPotion() { Position = new Vector2(300, 350) });
+            pickeableItems.Add(new HealthPotion() { Position = new Vector2(350, 350) });
+
+            pickeableItems.Add(new PoisonPotion() { Position = new Vector2(280, 580) });
+            pickeableItems.Add(new PoisonPotion() { Position = new Vector2(330, 580) });
+            pickeableItems.Add(new PoisonPotion() { Position = new Vector2(380, 580) });
         }
 
         public void Update(GameTime gameTime)
@@ -35,20 +40,12 @@ namespace RPGPlatformerEngine
             
             Player.Update(gameTime);
             foreach (Enemy e in Enemies)
-            {
                 e.Update(gameTime,Player);
-            }
-
+            
             foreach (PickableItem item in pickeableItems)
             {
                 if (item.Alive && Player.BoundBox.Intersects(item.BoundBox))
                     item.Pick();
-                    
-            }
-
-            if (Input.LeftButtonPressed())
-            {
-                pickeableItems.Add(new PoisonPotion() { Position = Input.MousePosition});
             }
         }
 
@@ -59,9 +56,8 @@ namespace RPGPlatformerEngine
             foreach (Enemy e in Enemies)
                 e.Draw(sb);
             foreach (PickableItem item in pickeableItems)
-            {
                 item.Draw(sb);
-            }
+            
             sb.End();
         }
     }
