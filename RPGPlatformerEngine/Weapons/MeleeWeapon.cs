@@ -43,7 +43,7 @@ namespace RPGPlatformerEngine.Weapons
                 foreach (Enemy e in Player.Map.Enemies)
                     if (rangeRectangle.Intersects(e.BoundBox))
                     {
-                        int hitAmount = 0;//Do Calculations here.
+                        int hitAmount = 10;//Do Calculations here.
                         e.Hit(hitAmount, Player);
                         return;
                     }

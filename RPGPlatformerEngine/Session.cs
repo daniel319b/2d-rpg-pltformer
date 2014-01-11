@@ -30,11 +30,11 @@ namespace RPGPlatformerEngine
             CurrentMap = map;
             Player = new Player(TextureManager.SetTexture("player"), new Vector2(100), map);
             CurrentMap.Player = Player;
-            CurrentMap.Enemies.Add(new Enemy() { Position = new Vector2(362, 595), Animation = new Animation(TextureManager.SetTexture("shroom_animation"), 1, 7, 10) });
-            CurrentMap.Enemies.Add(new Enemy() { Position = new Vector2(1062, 595), Animation = new Animation(TextureManager.SetTexture("red_snail"), 4, 1, 7), Velocity = new Vector2 (-0.8f,0)});
-            CurrentMap.Enemies.Add(new Enemy() { Position = new Vector2(862, 595), Animation = new Animation(TextureManager.SetTexture("shroom_animation"), 1, 7, 10) });
             UI.WindowManager.InitializeWindows();
-          
+
+            CurrentMap.Enemies.Add(new RedSnail() { Position = new Vector2(1062, 595)});
+            CurrentMap.Enemies.Add(new Shroom() { Position = new Vector2(362, 595)});
+            CurrentMap.Enemies.Add(new Shroom() { Position = new Vector2(862, 595) });
         }
 
         /// <summary>
@@ -58,6 +58,15 @@ namespace RPGPlatformerEngine
             Player.Draw(spriteBatch);
             UI.WindowManager.Draw(spriteBatch);
             HUD.Draw(spriteBatch);
+        }
+
+        /// <summary>
+        /// The things to do when an enemy was killed, in UI side, like display a message.
+        /// </summary>
+        /// <param name="enemy"></param>
+        public void OnEnemyKill(Enemy enemy)
+        {
+            
         }
     }
 }

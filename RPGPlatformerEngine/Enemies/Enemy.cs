@@ -7,55 +7,40 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RPGPlatformerEngine
 {
-    public class Enemy : GameObject
+    public class Enemy : AnimatedObject
     {
-        /// <summary>
-        /// The health of the enemy.
-        /// </summary>
-        public int Health { get; private set; }
+        public EnemyStats Stats { get; protected set; }
 
-        /// <summary>
-        /// The max health that the enemy can have.
-        /// </summary>
-        public int MaxHealth { get; private set; }
-
-        /// <summary>
-        /// The attack rate of the enemy in seconds.
-        /// </summary>
-        public float AttackRate { get; private set; }
-
-        new public Rectangle BoundBox { get; set; }
-
-        float attackTime;
-        private bool changedDirection;
-
-        public Animation Animation { get; set; }
+        float attackTime, attackRate;
 
         public Enemy()
         {
-            velocity = new Vector2(-1.5f, 0);
-            
+            Stats = new EnemyStats() { MaxHealth = 100, Health = 100, Level = 1 };
         }
 
         public void Update(GameTime gameTime,Player player)
         {
-            base.Update();
+            base.Update(gameTime);
             position += velocity;
-            BoundBox = new Rectangle((int)Position.X, (int)Position.Y, Animation.CurrentFrameRect.Width, Animation.CurrentFrameRect.Height);
-
-            Animation.Position = Position;
-            Animation.Update(gameTime);
            
             UpdateMovement();
             PlayerCollision(gameTime,player);
-            
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            base.Draw(sb);
             var effect = velocity.X < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-            Animation.Draw(sb, effect);
+            base.Draw(sb, effect);
+            DrawHealthBar(sb);
+            //sb.Draw(TextureManager.SetTexture("square_border"), BoundBox, Color.Black);
+        }
+
+        private void DrawHealthBar(SpriteBatch sb)
+        {
+            int width = 80;
+            int height = 7;
+            Rectangle destRect = new Rectangle(BoundBox.X, BoundBox.Y - 20, (int)(width * ((float)Stats.Health /  Stats.MaxHealth)), height);
+            sb.Draw(TextureManager.SetTexture("square"), destRect, Color.Red);
         }
         /// <summary>
         /// Update the movement of the enemy
@@ -64,14 +49,11 @@ namespace RPGPlatformerEngine
         {
             Map map = Session.Singleton.CurrentMap;
             int leftTile = (int)Math.Floor((float)BoundBox.Left / Tile.Width);
-            int rightTile = (int)Math.Ceiling(((float)BoundBox.Right / Tile.Width)) - 1;
+            int rightTile = (int)Math.Ceiling(((float)BoundBox.Right / Tile.Width));
             if (map.GetTileCollision(leftTile, (int)Position.Y / Tile.Height) == TileCollision.Impassable ||
-                map.GetTileCollision(rightTile + 1, (int)Position.Y / Tile.Height) == TileCollision.Impassable)
+                map.GetTileCollision(rightTile, (int)Position.Y / Tile.Height) == TileCollision.Impassable)
             {
-              //  if (changedDirection == true) return;
-                velocity *= -1;// Vector2.Zero;
-                //changedDirection = true;
-                
+                velocity *= -1;      
             }
         }
 
@@ -94,11 +76,11 @@ namespace RPGPlatformerEngine
         private void AttackPlayer(GameTime gameTime, Player player)
         {
             attackTime += (float)gameTime.ElapsedGameTime.TotalSeconds;//count the attack interval.
-            if(attackTime > AttackRate)//if its time to attack, attack!
+            if(attackTime > attackRate)//if its time to attack, attack!
             {
                 player.OnHit(this);//attack the player.
                 attackTime = 0;//reset the time.
-                AttackRate = 1;
+                attackRate = Stats.AttackRate;
             }
         }
 
@@ -108,13 +90,20 @@ namespace RPGPlatformerEngine
         /// <param name="Owner">The owner of the bullet, the player.</param>
         public void Hit(int hitAmount, Player player)
         {
-            player.CurrentStatistics.Health -= 10;
-            Health -= hitAmount;
-            if (Health <= 0)
+            Stats.Health -= hitAmount;
+            if (Stats.Health <= 0)
             {
-                alive = false;
+                Alive = false;
+                OnDeath();
                 player.OnEnemyKill(this);
+                Session.Singleton.OnEnemyKill(this);
             }
+        }
+
+        protected virtual void OnDeath() 
+        {
+            var a = this as IItemDroppingEnemy;
+            if (a != null) a.DropItem();
         }
     }
 }

@@ -153,7 +153,7 @@ namespace RPGPlatformerEngine
         /// <param name="enemy">The enemy that hit the player.</param>
         public void OnHit(Enemy enemy)
         {
-            //CurrentStatistics.Health -= 5;
+            CurrentStatistics.Health -= 5;
             //velocity = new Vector2(50 * enemy.Velocity.X, 300);
         }
 
@@ -163,7 +163,8 @@ namespace RPGPlatformerEngine
         /// <param name="enemy">The enemy that was slain</param>
         public void OnEnemyKill(Enemy enemy)
         {
-            // updates stats, display a message..
+            // updates stats...
+            CurrentStatistics.ExperiencePoints += enemy.Stats.ExpPointsBonus;
         }
     }
 }

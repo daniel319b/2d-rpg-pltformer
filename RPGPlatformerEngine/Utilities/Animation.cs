@@ -45,6 +45,15 @@ namespace RPGPlatformerEngine
         Vector2 frameSize = Vector2.Zero;
 
         /// <summary>
+        /// The size of a frame in the animation as a vector.
+        /// </summary>
+        public Vector2 FrameSize
+        {
+            get { return frameSize; }
+            set { frameSize = value; }
+        }
+
+        /// <summary>
         /// The number of columns in the texture.
         /// </summary>
         int columns;
@@ -81,6 +90,12 @@ namespace RPGPlatformerEngine
             get { return position; }
             set { position = value; }
         }
+
+        /// <summary>
+        /// Is this animation active or not?
+        /// </summary>
+        public bool Active { get; set; }
+
         /// <summary>
         /// Constructs a new Animation.
         /// </summary>
@@ -101,6 +116,7 @@ namespace RPGPlatformerEngine
             frameTime = 1.0f / framesPerSecond;
             Reset();//reset all the update components.
             repeating = true;
+            Active = true;
         }
 
         /// <summary>
@@ -120,6 +136,7 @@ namespace RPGPlatformerEngine
         /// <param name="gameTime">GameTime Object</param>
         public void Update(GameTime gameTime)
         {
+            if (!Active) return;
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             timer += elapsed; //add the total seconds passed from the last update to the timer.
 
@@ -178,5 +195,7 @@ namespace RPGPlatformerEngine
             spriteBatch.Draw(texture, position, currentFrameRect, Color.White, rotation, origin, scale, SpriteEffects.FlipHorizontally, 0.0f);
             spriteBatch.End();
         }
+
+       
     }
 }
