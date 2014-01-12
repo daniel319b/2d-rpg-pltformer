@@ -60,5 +60,10 @@ namespace RPGPlatformerEngine
             
             sb.End();
         }
+
+        public void AddPickable(PickableItem item)
+        {
+            pickeableItems.Add(item);
+        }
     }
 }

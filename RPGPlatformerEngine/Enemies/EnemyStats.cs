@@ -33,6 +33,6 @@ namespace RPGPlatformerEngine
         /// <summary>
         /// The attack rate of the enemy in seconds.
         /// </summary>
-        public float AttackRate { get; private set; }
+        public float AttackRate { get; set; }
     }
 }

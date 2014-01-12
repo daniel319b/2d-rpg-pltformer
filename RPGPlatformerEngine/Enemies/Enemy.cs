@@ -15,7 +15,7 @@ namespace RPGPlatformerEngine
 
         public Enemy()
         {
-            Stats = new EnemyStats() { MaxHealth = 100, Health = 100, Level = 1 };
+            Stats = new EnemyStats() { MaxHealth = 100, Health = 100, Level = 1, AttackRate = 1 };
         }
 
         public void Update(GameTime gameTime,Player player)

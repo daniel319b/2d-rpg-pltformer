@@ -18,7 +18,7 @@ namespace RPGPlatformerEngine.Weapons
         public MeleeWeapon(Player player)
         {
             Player = player;
-            hitRate = 0.1f;
+            hitRate = 0.5f;
         }
 
         public override void Update(GameTime gameTime)

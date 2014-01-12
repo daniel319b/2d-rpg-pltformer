@@ -14,11 +14,13 @@ namespace RPGPlatformerEngine
             //animations["dying"] = new Animation(TextureManager.SetTexture("red_snail_dying"), 3, 1, 10);
             CurrentAnimation = animations["walking"];
             Velocity = new Vector2(-0.8f, 0);
+            Stats.ExpPointsBonus = 5;
+            Stats.Health = 50;
         }
 
-        public IPickable DropItem()
+        public void DropItem()
         {
-            return new HealthPotion();
+            Session.Singleton.CurrentMap.AddPickable(new HealthPotion() { Position = new Vector2 (BoundBox.X, BoundBox.Y)});
         }
     }
 
@@ -29,16 +31,18 @@ namespace RPGPlatformerEngine
             animations["walking"] = new Animation(TextureManager.SetTexture("shroom_animation"), 1, 7, 10);
             CurrentAnimation = animations["walking"];
             Velocity = new Vector2(-1.5f, 0);
+            Stats.ExpPointsBonus = 2;
+            Stats.Health = 20;
         }
 
-        public IPickable DropItem()
+        public void DropItem()
         {
-            return new PoisonPotion();
+           
         }
     }
 
     public interface IItemDroppingEnemy
     {
-        IPickable DropItem();
+        void DropItem();
     }
 }
