@@ -19,6 +19,10 @@ namespace RPGPlatformerEngine
 
         public int UpgradePoints { get; set; }
 
+        public int Money { get; set; }
+
+        public int BaseDamage { get; set; }
+
         public PlayerStatistics()
         {
             Level = 1;
@@ -26,6 +30,10 @@ namespace RPGPlatformerEngine
             ExperiencePoints = 0;
             XPMultiplier = 1;
             UpgradePoints = 0;
+            Money = 10;
+            BaseDamage = 5;
         }
+
+       
     }
 }

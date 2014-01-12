@@ -54,6 +54,48 @@ namespace RPGPlatformerEngine
         void Reload();
 
     }
- 
+
+
+    public abstract class CoinItem : PickableItem
+    {
+        abstract protected int moneyValue { get; }
+
+        public override string Name
+        {
+            get { return "Money"; }
+        }
+
+        abstract protected Animation animation { get; }
+
+        public override void Pick()
+        {
+            // here we need to add to the money of the player since we are not treating 'money' as inventory item.
+            Session.Singleton.Player.CurrentStatistics.Money += moneyValue;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            animation.Update(Session.Singleton.GameTime);
+        }    }
+
+    public class BronzeCoin : CoinItem
+    {
+        protected override int moneyValue { get { return 10; } }
+
+        public override Texture2D Texture { get { return TextureManager.SetTexture("coin_bronze"); } }
+
+        protected override Animation animation { get { return new Animation(TextureManager.SetTexture("coin_bronze_animation"), 3, 1, 10); } }
+    }
+
+    public class GoldCoin : CoinItem
+    {
+        protected override int moneyValue { get { return 50; } }
+
+        public override Texture2D Texture { get { return TextureManager.SetTexture("coin_gold"); } }
+
+        protected override Animation animation { get { return new Animation(TextureManager.SetTexture("coin_gold_animation"), 3, 1, 10); } }
+
+    }
 }
 

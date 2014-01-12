@@ -12,11 +12,11 @@ namespace RPGPlatformerEngine.UI
         List<PlayerUpgrade> upgrades;
 
         public UpgradesWindow()
-            : base(new Vector2(10), TextureManager.SetTexture("form"))
+            : base(new Vector2(10), TextureManager.SetTexture("UI/form"))
         {
             upgrades = new List<PlayerUpgrade>();
             for (int i = 1; i < 5; i++)
-                upgrades.Add(TextureManager.Content.Load<PlayerUpgrade>("Upgrade" + i));
+                upgrades.Add(TextureManager.Content.Load<PlayerUpgrade>("Upgrades/Upgrade" + i));
 
             AddControls(new Label(new Vector2(10, 10), "Upgrade:"),
                         new Label(new Vector2(220, 10), "Description:"),

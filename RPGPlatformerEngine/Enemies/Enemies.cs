@@ -10,12 +10,12 @@ namespace RPGPlatformerEngine
     {
         public RedSnail()
         {
-            animations["walking"] = new Animation(TextureManager.SetTexture("red_snail"), 4, 1, 10);
+            animations["walking"] = new Animation(TextureManager.SetTexture("Monsters/red_snail"), 4, 1, 10);
             //animations["dying"] = new Animation(TextureManager.SetTexture("red_snail_dying"), 3, 1, 10);
             CurrentAnimation = animations["walking"];
             Velocity = new Vector2(-0.8f, 0);
             Stats.ExpPointsBonus = 5;
-            Stats.Health = 50;
+            Stats.MaxHealth = Stats.Health = 50;
         }
 
         public void DropItem()
@@ -28,11 +28,11 @@ namespace RPGPlatformerEngine
     {
         public Shroom()
         {
-            animations["walking"] = new Animation(TextureManager.SetTexture("shroom_animation"), 1, 7, 10);
+            animations["walking"] = new Animation(TextureManager.SetTexture("Monsters/shroom_animation"), 1, 7, 10);
             CurrentAnimation = animations["walking"];
             Velocity = new Vector2(-1.5f, 0);
             Stats.ExpPointsBonus = 2;
-            Stats.Health = 20;
+            Stats.MaxHealth = Stats.Health = 20;
         }
 
         public void DropItem()
@@ -43,6 +43,9 @@ namespace RPGPlatformerEngine
 
     public interface IItemDroppingEnemy
     {
+        /// <summary>
+        /// This enemy will drop it's item.
+        /// </summary>
         void DropItem();
     }
 }

@@ -59,6 +59,6 @@ namespace RPGPlatformerEngine
         /// <summary>
         /// The background texture for the info box.
         /// </summary>
-         public static Texture2D Texture { get { return TextureManager.SetTexture("infoBox"); } }
+         public static Texture2D Texture { get { return TextureManager.SetTexture("UI/infoBox"); } }
     }
 }

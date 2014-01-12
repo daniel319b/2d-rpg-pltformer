@@ -74,7 +74,6 @@
     <Compile Include="Inventory System\InventoryManager.cs" />
     <Compile Include="Inventory System\InventoryItem.cs" />
     <Compile Include="Inventory System\Item.cs" />
-    <Compile Include="Inventory System\Potion.cs" />
     <Compile Include="Inventory System\WeaponItem.cs" />
     <Compile Include="Items\PickableItem.cs" />
     <Compile Include="Items\Potions.cs" />

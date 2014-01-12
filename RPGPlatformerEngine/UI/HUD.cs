@@ -27,6 +27,6 @@ namespace RPGPlatformerEngine
             sb.Draw(HealthBarTexture, new Rectangle(20, 10, healthWidth, 44), new Rectangle(0,0, HealthBarTexture.Width, 44), Color.Red);
         }
 
-        public static Texture2D HealthBarTexture { get { return TextureManager.SetTexture("HealthBar"); } }
+        public static Texture2D HealthBarTexture { get { return TextureManager.SetTexture("Player/HealthBar"); } }
     }
 }

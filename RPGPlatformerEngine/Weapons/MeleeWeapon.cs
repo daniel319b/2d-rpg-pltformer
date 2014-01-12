@@ -43,7 +43,7 @@ namespace RPGPlatformerEngine.Weapons
                 foreach (Enemy e in Player.Map.Enemies)
                     if (rangeRectangle.Intersects(e.BoundBox))
                     {
-                        int hitAmount = 10;//Do Calculations here.
+                        int hitAmount = Player.CurrentStatistics.BaseDamage + this.Damage;//Do Calculations here.
                         e.Hit(hitAmount, Player);
                         return;
                     }
@@ -56,5 +56,6 @@ namespace RPGPlatformerEngine.Weapons
             spriteBatch.Draw(TextureManager.SetTexture("square"), rangeRectangle, Color.Black);
             spriteBatch.End();
         }
+
     }
 }

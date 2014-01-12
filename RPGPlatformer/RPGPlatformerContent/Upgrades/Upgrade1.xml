@@ -4,6 +4,6 @@
     <Level>1</Level>
     <UpgradePercent>0.1</UpgradePercent>
     <Name>Reload Speed</Name>
-    <Description>Your weapon reloads faster</Description>  
+    <Description>Your weapon reloads faster</Description>
   </Asset>
 </XnaContent>

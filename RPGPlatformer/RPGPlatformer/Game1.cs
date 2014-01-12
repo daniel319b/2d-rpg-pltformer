@@ -57,7 +57,7 @@ namespace RPGPlatformer
             TextureManager.Content = Content;
             Font.Regular = Content.Load<SpriteFont>("font");
 
-            map = Content.Load<Map>("map2");    
+            map = Content.Load<Map>("Map/map2");    
             session = new Session(map);
         }
 

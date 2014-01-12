@@ -14,7 +14,7 @@ namespace RPGPlatformerEngine.UI
 
         InventoryManager inventoryManager;
 
-        public InventoryWindow() : base (new Vector2(10), TextureManager.SetTexture("form"))
+        public InventoryWindow() : base (new Vector2(10), TextureManager.SetTexture("UI/form"))
         {
             player = Session.Singleton.Player;
             inventory = player.Inventory;

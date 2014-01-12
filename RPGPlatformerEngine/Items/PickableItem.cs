@@ -40,7 +40,7 @@ namespace RPGPlatformerEngine
         /// <summary>
         /// Picks ups this item - adds it to the players inventory.
         /// </summary>
-        public void Pick()
+        public virtual void Pick()
         {
             Session.Singleton.Player.Inventory.AddItem(new InventoryItem(Name, Texture));
             Alive = false;

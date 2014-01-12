@@ -36,7 +36,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Map2.xml">
+    <Compile Include="Map\Map2.xml">
       <Name>Map2</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
@@ -44,14 +44,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="tree.png">
+    <Compile Include="Map\tree.png">
       <Name>tree</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bg_2_01.jpg">
+    <Compile Include="Map\bg_2_01.jpg">
       <Name>bg_2_01</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -65,38 +65,38 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tiles.png">
+    <Compile Include="Map\Tiles.png">
       <Name>Tiles</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="player.png">
+    <Compile Include="Player\player.png">
       <Name>player</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bush1.png">
+    <Compile Include="Map\bush1.png">
       <Name>bush1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="bush2.png">
+    <Compile Include="Map\bush2.png">
       <Name>bush2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="bush3.png">
+    <Compile Include="Map\bush3.png">
       <Name>bush3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Upgrade1.xml">
+    <Compile Include="Upgrades\Upgrade1.xml">
       <Name>Upgrade1</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
@@ -104,7 +104,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="form.png">
+    <Compile Include="UI\form.png">
       <Name>form</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -118,7 +118,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Upgrade2.xml">
+    <Compile Include="Upgrades\Upgrade2.xml">
       <SubType>Designer</SubType>
       <Name>Upgrade2</Name>
       <Importer>XmlImporter</Importer>
@@ -126,7 +126,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Upgrade3.xml">
+    <Compile Include="Upgrades\Upgrade3.xml">
       <SubType>Designer</SubType>
       <Name>Upgrade3</Name>
       <Importer>XmlImporter</Importer>
@@ -134,7 +134,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Upgrade4.xml">
+    <Compile Include="Upgrades\Upgrade4.xml">
       <SubType>Designer</SubType>
       <Name>Upgrade4</Name>
       <Importer>XmlImporter</Importer>
@@ -156,7 +156,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="infoBox.png">
+    <Compile Include="UI\infoBox.png">
       <Name>infoBox</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -184,28 +184,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="shroom_animation.png">
+    <Compile Include="Monsters\shroom_animation.png">
       <Name>shroom_animation</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HealthBar.png">
+    <Compile Include="Player\HealthBar.png">
       <Name>HealthBar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="red_snail.png">
+    <Compile Include="Monsters\red_snail.png">
       <Name>red_snail</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="mesos_bronze.png">
+    <Compile Include="Items\mesos_bronze.png">
       <Name>mesos_bronze</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

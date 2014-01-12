@@ -24,11 +24,13 @@ namespace RPGPlatformerEngine
 
         public static Session Singleton { get; private set; }
 
+        public GameTime GameTime { get; set; }
+
         public Session(Map map)
         {
             Singleton = this;
             CurrentMap = map;
-            Player = new Player(TextureManager.SetTexture("player"), new Vector2(100), map);
+            Player = new Player(TextureManager.SetTexture("Player/player"), new Vector2(100), map);
             CurrentMap.Player = Player;
             UI.WindowManager.InitializeWindows();
 
@@ -43,6 +45,7 @@ namespace RPGPlatformerEngine
         /// <param name="gameTime">A GameTime Object</param>
         public void Update(GameTime gameTime)
         {
+            this.GameTime = gameTime;
             Input.Update();
             CurrentMap.Update(gameTime);
             UI.WindowManager.Update();
@@ -68,5 +71,7 @@ namespace RPGPlatformerEngine
         {
             
         }
+
+        
     }
 }

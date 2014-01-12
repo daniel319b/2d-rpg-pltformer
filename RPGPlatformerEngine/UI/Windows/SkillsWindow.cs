@@ -9,6 +9,6 @@ namespace RPGPlatformerEngine.UI
     public class SkillsWindow : Window
     {
 
-        public SkillsWindow() : base(new Vector2(10), TextureManager.SetTexture("form")) { }
+        public SkillsWindow() : base(new Vector2(10), TextureManager.SetTexture("UI/form")) { }
     }
 }

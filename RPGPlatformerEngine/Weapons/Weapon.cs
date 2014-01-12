@@ -11,6 +11,8 @@ namespace RPGPlatformerEngine
     {
         public Player Player { get; set; }
 
+        public int Damage { get; set; }
+
         public abstract void Update(GameTime gameTime);
 
         protected abstract void HandleInput(GameTime gameTime);
