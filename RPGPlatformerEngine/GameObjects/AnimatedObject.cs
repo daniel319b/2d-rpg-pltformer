@@ -26,7 +26,7 @@ namespace RPGPlatformerEngine
             animations = new Dictionary<string, Animation>();   
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             base.Update();
             CurrentAnimation.Position = Position;

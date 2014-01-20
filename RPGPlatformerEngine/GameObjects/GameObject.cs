@@ -117,7 +117,7 @@ namespace RPGPlatformerEngine
         /// A rectangle representing the bounds of the object - for collision.
         /// </summary>
         [ContentSerializerIgnore]
-        public Rectangle BoundBox
+        public virtual Rectangle BoundBox
         {
             // get { return boundBox; }
             // protected set { boundBox = value; }

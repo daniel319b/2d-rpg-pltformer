@@ -61,6 +61,7 @@ namespace RPGPlatformerEngine
             Player.Draw(spriteBatch);
             UI.WindowManager.Draw(spriteBatch);
             HUD.Draw(spriteBatch);
+
         }
 
         /// <summary>

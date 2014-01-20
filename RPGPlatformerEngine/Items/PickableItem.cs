@@ -27,16 +27,17 @@ namespace RPGPlatformerEngine
         /// <summary>
         /// The Bounding Rectangle of this item.
         /// </summary>
-        new public Rectangle BoundBox
+        override public Rectangle BoundBox
         {
             get { return new Rectangle((int)Position.X, (int)Position.Y, (int)(Texture.Width * Scale), (int)(Texture.Height * Scale)); }
         }
 
         public PickableItem()
         {
-            Scale = 0.5f;
+           /// Scale = 0.5f;
         }
 
+        public virtual void Update(GameTime gameTime) { }
         /// <summary>
         /// Picks ups this item - adds it to the players inventory.
         /// </summary>

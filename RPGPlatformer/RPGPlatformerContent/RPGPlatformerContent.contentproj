@@ -205,8 +205,36 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Items\mesos_bronze.png">
-      <Name>mesos_bronze</Name>
+    <Compile Include="Monsters\shroom_walking.png">
+      <Name>shroom_walking</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Monsters\shroom_death.png">
+      <Name>shroom_death</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Monsters\shroom_standing.png">
+      <Name>shroom_standing</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Monsters\shroom_hit.png">
+      <Name>shroom_hit</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Items\coin_bronze.png">
+      <Name>coin_bronze</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

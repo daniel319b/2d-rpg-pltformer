@@ -18,7 +18,7 @@ namespace RPGPlatformerEngine.Weapons
         public MeleeWeapon(Player player)
         {
             Player = player;
-            hitRate = 0.5f;
+            hitRate = 0.7f;
         }
 
         public override void Update(GameTime gameTime)
@@ -53,7 +53,7 @@ namespace RPGPlatformerEngine.Weapons
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(TextureManager.SetTexture("square"), rangeRectangle, Color.Black);
+            spriteBatch.Draw(TextureManager.SetTexture("square"), new Rectangle(rangeRectangle.X, rangeRectangle.Y, 10, 10), Color.Black);
             spriteBatch.End();
         }
 

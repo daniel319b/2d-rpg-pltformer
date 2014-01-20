@@ -40,12 +40,13 @@ namespace RPGPlatformerEngine
             
             Player.Update(gameTime);
             foreach (Enemy e in Enemies)
-                e.Update(gameTime,Player);
+                e.Update(gameTime);
             
             foreach (PickableItem item in pickeableItems)
             {
                 if (item.Alive && Player.BoundBox.Intersects(item.BoundBox))
                     item.Pick();
+                item.Update(gameTime);
             }
         }
 

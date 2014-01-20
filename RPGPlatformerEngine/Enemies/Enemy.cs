@@ -7,9 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RPGPlatformerEngine
 {
+
     public class Enemy : AnimatedObject
     {
         public EnemyStats Stats { get; protected set; }
+
+        public HorizontalDirection Direction { get; set; }
 
         float attackTime, attackRate;
 
@@ -18,18 +21,21 @@ namespace RPGPlatformerEngine
             Stats = new EnemyStats() { MaxHealth = 100, Health = 100, Level = 1, AttackRate = 1 };
         }
 
-        public void Update(GameTime gameTime,Player player)
+        public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             position += velocity;
-           
+            if (velocity.X < 0) Direction = HorizontalDirection.Left;
+            else if (velocity.X > 0) Direction = HorizontalDirection.Right;
+
             UpdateMovement();
-            PlayerCollision(gameTime,player);
+            PlayerCollision(gameTime);
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            var effect = velocity.X < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            var effect = Direction == HorizontalDirection.Left ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            
             base.Draw(sb, effect);
             DrawHealthBar(sb);
             //sb.Draw(TextureManager.SetTexture("square_border"), BoundBox, Color.Black);
@@ -62,10 +68,10 @@ namespace RPGPlatformerEngine
         /// </summary>
         /// <param name="gameTime">A GameTime object.</param>
         /// <param name="player">The player of the game.</param>
-        private void PlayerCollision(GameTime gameTime, Player player)
+        private void PlayerCollision(GameTime gameTime)
         {
-            if (BoundBox.Intersects(player.BoundBox))
-                AttackPlayer(gameTime, player);
+            if (BoundBox.Intersects(Session.Singleton.Player.BoundBox))
+                AttackPlayer(gameTime, Session.Singleton.Player);
         }
 
         /// <summary>
@@ -91,6 +97,7 @@ namespace RPGPlatformerEngine
         public void Hit(int hitAmount, Player player)
         {
             Stats.Health -= hitAmount;
+            OnHit();
             if (Stats.Health <= 0)
             {
                 Alive = false;
@@ -100,10 +107,18 @@ namespace RPGPlatformerEngine
             }
         }
 
+        /// <summary>
+        /// What will happen when this enemy dies.
+        /// </summary>
         protected virtual void OnDeath() 
         {
             var a = this as IItemDroppingEnemy;
             if (a != null) a.DropItem();
         }
+
+        /// <summary>
+        /// What happens when this enemy gets hit - override in derived classes.
+        /// </summary>
+        protected virtual void OnHit() { }
     }
 }

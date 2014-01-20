@@ -21,5 +21,9 @@ Content\Items\poison_potion.xnb
 Content\Monsters\shroom_animation.xnb
 Content\Player\HealthBar.xnb
 Content\Monsters\red_snail.xnb
-Content\Items\mesos_bronze.xnb
+Content\Monsters\shroom_walking.xnb
+Content\Monsters\shroom_death.xnb
+Content\Monsters\shroom_standing.xnb
+Content\Monsters\shroom_hit.xnb
+Content\Items\coin_bronze.xnb
 Content\font.xnb
