@@ -8,15 +8,22 @@ using Microsoft.Xna.Framework;
 
 namespace RPGPlatformerEngine.UI
 {
+    /// <summary>
+    /// The types of windows in the game.
+    /// </summary>
     public enum Windows
     {
         Inventory,
         Upgrades,
         //SaveMap,
-       // LoadMap,
+        // LoadMap,
         Skills,
+        PlayerInfo,
     }
 
+    /// <summary>
+    /// A class that handles all the updating/drawing/showing/hiding of windows.
+    /// </summary>
     public static class WindowManager
     {
         static Dictionary<string, Window> windows = new Dictionary<string,Window>();
@@ -34,6 +41,10 @@ namespace RPGPlatformerEngine.UI
  
         }
 
+        /// <summary>
+        /// Toggles show/hide of a window.
+        /// </summary>
+        /// <param name="window"></param>
         public static void ToggleShow(Windows window)
         {
             //Show Window Logic here.
@@ -42,12 +53,20 @@ namespace RPGPlatformerEngine.UI
             win.Enabled = win.Enabled ? false : true;
         }
 
+        /// <summary>
+        /// Gets the window object by the type;
+        /// </summary>
+        /// <param name="window"></param>
+        /// <returns></returns>
         public static Window GetWindow(Windows window)
         {
             string windowName = Enum.GetName(typeof(Windows), window);
             return windows[windowName];
         }
 
+        /// <summary>
+        /// Updates all the windows.
+        /// </summary>
         public static void Update()
         {
             foreach (Window w in windows.Values)
@@ -55,6 +74,10 @@ namespace RPGPlatformerEngine.UI
                     w.Update();
         }
 
+        /// <summary>
+        /// Draws all the windows.
+        /// </summary>
+        /// <param name="spriteBatch">A Spritebatch object.</param>
         public static void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();

@@ -17,7 +17,6 @@ namespace RPGPlatformerEngine
         static MouseState oldMouseState;
         static KeyboardState    keyState;
         static MouseState   mouseState;
-       
 
         #region Keyboard
         /// <summary>
@@ -71,7 +70,6 @@ namespace RPGPlatformerEngine
 
             //Update Actions
             InputActions.Update();
-            
         }
         #endregion
 

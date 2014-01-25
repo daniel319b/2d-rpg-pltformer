@@ -38,6 +38,7 @@ namespace RPGPlatformerEngine
             Velocity = new Vector2(-1.5f, 0);
             Stats.ExpPointsBonus = 2;
             Stats.MaxHealth = Stats.Health = 20;
+            
         }
 
         public override void Update(GameTime gameTime)

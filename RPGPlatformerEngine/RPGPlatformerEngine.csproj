@@ -91,6 +91,7 @@
     <Compile Include="UI\HUD.cs" />
     <Compile Include="UI\Windows\InventoryWindow.cs" />
     <Compile Include="UI\Label.cs" />
+    <Compile Include="UI\Windows\PlayerInfoWindow.cs" />
     <Compile Include="UI\Windows\SkillsWindow.cs" />
     <Compile Include="UI\Windows\UpgradesWindow.cs" />
     <Compile Include="UI\Window.cs" />

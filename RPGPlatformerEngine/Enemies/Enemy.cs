@@ -55,9 +55,9 @@ namespace RPGPlatformerEngine
         {
             Map map = Session.Singleton.CurrentMap;
             int leftTile = (int)Math.Floor((float)BoundBox.Left / Tile.Width);
-            int rightTile = (int)Math.Ceiling(((float)BoundBox.Right / Tile.Width));
+            int rightTile = (int)Math.Ceiling(((float)BoundBox.Right / Tile.Width)) - 1;
             if (map.GetTileCollision(leftTile, (int)Position.Y / Tile.Height) == TileCollision.Impassable ||
-                map.GetTileCollision(rightTile, (int)Position.Y / Tile.Height) == TileCollision.Impassable)
+                map.GetTileCollision(rightTile+1, (int)Position.Y / Tile.Height) == TileCollision.Impassable)
             {
                 velocity *= -1;      
             }

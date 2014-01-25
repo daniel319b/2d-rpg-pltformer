@@ -34,7 +34,7 @@ namespace RPGPlatformerEngine
 
         public PickableItem()
         {
-           /// Scale = 0.5f;
+            Scale = 0.5f;
         }
 
         public virtual void Update(GameTime gameTime) { }

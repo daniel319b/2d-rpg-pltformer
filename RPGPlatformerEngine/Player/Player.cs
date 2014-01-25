@@ -53,6 +53,7 @@ namespace RPGPlatformerEngine
             ApplyPhysics(time);
             HandleCollisions();
             knife.Update(gameTime);
+            
         }
 
         private void HandleInput()
@@ -165,6 +166,8 @@ namespace RPGPlatformerEngine
         {
             // updates stats...
             CurrentStatistics.ExperiencePoints += enemy.Stats.ExpPointsBonus;
+            if (CurrentStatistics.ExperiencePoints >= CurrentStatistics.ExpPointsToNextLevel)
+                CurrentStatistics.Level++;
         }
     }
 }

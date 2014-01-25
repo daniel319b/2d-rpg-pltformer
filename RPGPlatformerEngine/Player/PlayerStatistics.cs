@@ -23,6 +23,8 @@ namespace RPGPlatformerEngine
 
         public int BaseDamage { get; set; }
 
+        public int ExpPointsToNextLevel { get { return (Level * Level) * 3; } }
+
         public PlayerStatistics()
         {
             Level = 1;

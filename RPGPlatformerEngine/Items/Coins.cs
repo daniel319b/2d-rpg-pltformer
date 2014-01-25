@@ -26,6 +26,9 @@ namespace RPGPlatformerEngine
 
         public Animation animation { get; protected set; }
 
+
+        public CoinItem() { Scale = 1; }
+
         public override void Pick()
         {
             // here we need to add to the money of the player since we are not treating 'money' as inventory item.

@@ -31,7 +31,9 @@ namespace RPGPlatformerEngine.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
+            //base.Draw(spriteBatch);
+            //Change that to Vector Size 
+            spriteBatch.Draw(Texture, new Rectangle(BoundBox.X, BoundBox.Y, BoundBox.Width - 355, BoundBox.Height - 7), Color.White);
             inventoryManager.Draw(spriteBatch);
         }
     }
