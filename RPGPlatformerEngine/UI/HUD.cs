@@ -12,21 +12,59 @@ namespace RPGPlatformerEngine
     /// </summary>
     public class HUD
     {
+        static FilledBar healthBar = new FilledBar(new Vector2(20, 10), Color.Gray, Color.Red) { Texture = TextureManager.SetTexture("Player/HealthBar") };
+        static FilledBar expBar = new FilledBar(new Vector2(20, 80), Color.Gray, Color.Gold) { Texture = TextureManager.SetTexture("Player/HealthBar") };
+
         public static void Draw(SpriteBatch sb)
         {
             sb.Begin();
-            DrawHealthBar(sb);
+            DrawBars(sb);
             sb.End();
         }
 
-        private static void DrawHealthBar(SpriteBatch sb)
+        private static void DrawBars(SpriteBatch sb)
         {
-            Player player = Session.Singleton.Player;
-            int healthWidth =  (int)(HealthBarTexture.Width * ((double)player.CurrentStatistics.Health / player.CurrentStatistics.MaxHealth));
-            sb.Draw(HealthBarTexture, new Rectangle(20, 10, HealthBarTexture.Width, 44), new Rectangle(0, 0, HealthBarTexture.Width, 44), Color.Gray);
-            sb.Draw(HealthBarTexture, new Rectangle(20, 10, healthWidth, 44), new Rectangle(0,0, HealthBarTexture.Width, 44), Color.Red);
+            var stats = Session.Singleton.Player.CurrentStatistics;
+            healthBar.Draw(sb, stats.Health, stats.MaxHealth);
+            expBar.Draw(sb, stats.ExperiencePoints, stats.ExpPointsToNextLevel);
+            //int healthWidth =  (int)(HealthBarTexture.Width * ((double)player.CurrentStatistics.Health / player.CurrentStatistics.MaxHealth));
+            //sb.Draw(HealthBarTexture, new Vector2(20,10), Color.Gray);
+            //sb.Draw(HealthBarTexture, new Rectangle(20, 10, healthWidth, 44), Color.Gold);
         }
 
-        public static Texture2D HealthBarTexture { get { return TextureManager.SetTexture("Player/HealthBar"); } }
+    }
+
+    /// <summary>
+    /// A class that represents a 'Bar' UI object like Health/Exp/Armor bar. 
+    /// </summary>
+    public class FilledBar
+    {
+        public Vector2 Position { get; set; }
+        public Texture2D Texture { get; set; }
+
+        public Color BackColor { get; set; }
+        public Color BarColor { get; set; }
+
+        public Vector2 Size { get; set; }
+
+        public FilledBar(Vector2 position, Color backColor, Color barColor)
+        {
+            Position = position;
+            BackColor = backColor;
+            BarColor = barColor;
+            Size = Vector2.Zero;
+        }
+
+        public void Draw(SpriteBatch sb, int value, int maxValue)
+        {
+            if(Texture != null)
+            {
+                Size = Size == Vector2.Zero ? new Vector2(Texture.Width, Texture.Height) : Size;
+                int healthWidth = (int)(Size.X * ((double)value / maxValue));
+
+                sb.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), BackColor);
+                sb.Draw(Texture, new Rectangle((int)Position.X,(int)Position.Y, healthWidth, (int)Size.Y), BarColor);
+            }
+        }
     }
 }

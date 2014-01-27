@@ -14,7 +14,7 @@ namespace RPGPlatformerEngine
         Right,
     }
 
-    public class Player : GameObject
+    public class Player : AnimatedObject
     {
         public Vector2 Acceleration { get; private set; }
       
@@ -31,8 +31,11 @@ namespace RPGPlatformerEngine
         bool isOnGround;
 
         RPGPlatformerEngine.Weapons.MeleeWeapon knife;
-        public Player(Texture2D tex, Vector2 pos,Map map):base(pos,tex)
+        Weapons.Gun gun;
+        public Player(Texture2D tex, Vector2 pos,Map map)
         {
+            Texture = tex;
+            Position = pos;
             Map = map;
             CurrentStatistics = new PlayerStatistics();
             Inventory = new Inventory(new Vector2(10), 7, 7);
@@ -40,11 +43,17 @@ namespace RPGPlatformerEngine
             Inventory.AddItem(new InventoryItem("Sword"));
             Inventory.AddItem(new InventoryItem("Sword"));
             knife = new RPGPlatformerEngine.Weapons.MeleeWeapon(this);
+            gun = new Weapons.Gun();
+
+            //Set up animations
+            animations["Running"] = new Animation(TextureManager.SetTexture("Player/Run"), 10, 1, 9);
+            animations["Idle"] = new Animation(tex, 1, 1, 1);
+            CurrentAnimation = animations["Idle"];
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            base.Update();
+            base.Update(gameTime);
             float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (!isOnGround)
                 Acceleration = new Vector2(0, 1400);
@@ -52,8 +61,16 @@ namespace RPGPlatformerEngine
             HandleInput();
             ApplyPhysics(time);
             HandleCollisions();
-            knife.Update(gameTime);
-            
+
+            gun.Update(gameTime);
+            //knife.Update(gameTime);
+            //if (Alive && isOnGround)
+            //{
+            //    if (Math.Abs(Velocity.X) > 0)
+            //        CurrentAnimation = animations["Run"];
+            //    else
+            //        CurrentAnimation = animations["Idle"];
+            //}
         }
 
         private void HandleInput()
@@ -62,12 +79,19 @@ namespace RPGPlatformerEngine
             {
                 position.X += 2;
                 HorizontalDirection = RPGPlatformerEngine.HorizontalDirection.Right;
+                SetAnimation("Running");
             }
-            if (Input.KeyDown(Keys.A))
+            else if (Input.KeyDown(Keys.A))
             {
                 position.X -= 2;
                 HorizontalDirection = RPGPlatformerEngine.HorizontalDirection.Left;
+                SetAnimation("Running");
             }
+            else
+            {
+                SetAnimation("Idle");
+            }
+
             if (Input.KeyPressed(Keys.W) && isOnGround)
             {
                 isOnGround = false;
@@ -141,11 +165,15 @@ namespace RPGPlatformerEngine
         
         public override void Draw(SpriteBatch sb)
         {
-          //  sb.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Camera.Transform);
+            //  sb.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Camera.Transform);
+
+            var effect = HorizontalDirection == HorizontalDirection.Left ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+
             sb.Begin();
-            sb.Draw(texture, position, Color.White);
+            base.Draw(sb, effect);
+            gun.Draw(sb);
             sb.End();
-            knife.Draw(sb);
+            //knife.Draw(sb);
         }
 
         /// <summary>
@@ -166,8 +194,13 @@ namespace RPGPlatformerEngine
         {
             // updates stats...
             CurrentStatistics.ExperiencePoints += enemy.Stats.ExpPointsBonus;
-            if (CurrentStatistics.ExperiencePoints >= CurrentStatistics.ExpPointsToNextLevel)
+            int diff = CurrentStatistics.ExpPointsToNextLevel - CurrentStatistics.ExperiencePoints;
+
+            if (diff <= 0)
+            {
                 CurrentStatistics.Level++;
+                CurrentStatistics.ExperiencePoints = -diff;
+            }
         }
     }
 }

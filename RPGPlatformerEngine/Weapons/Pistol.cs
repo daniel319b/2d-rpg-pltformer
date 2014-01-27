@@ -7,9 +7,11 @@ namespace RPGPlatformerEngine.Weapons
 {
     public class Pistol : Gun
     {
-        public Pistol(Player player)
+        public Pistol()
         {
 
         }
+
+       
     }
 }

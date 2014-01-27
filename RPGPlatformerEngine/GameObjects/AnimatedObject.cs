@@ -48,6 +48,16 @@ namespace RPGPlatformerEngine
             CurrentAnimation.Reset();
             CurrentAnimation.Active = false;
         }
+
+        /// <summary>
+        /// Sets the current animation.
+        /// </summary>
+        /// <param name="name">The name of the animation you want to be set.</param>
+        public void SetAnimation(string name)
+        {
+            CurrentAnimation = animations[name];
+            CurrentAnimation.Position = Position;//prevent bugs
+        }
     }
 }
 

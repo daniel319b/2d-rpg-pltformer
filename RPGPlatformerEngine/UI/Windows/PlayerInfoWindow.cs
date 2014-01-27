@@ -31,7 +31,7 @@ namespace RPGPlatformerEngine.UI
             var stats = Session.Singleton.Player.CurrentStatistics;
             lblMoney.Text = "Money: " + stats.Money;
             lblHealth.Text = "Health: " + stats.Health;
-            lblExp.Text = "Expirience Points: " + stats.ExperiencePoints;
+            lblExp.Text = "Experience Points: " + stats.ExperiencePoints;
             lblLevel.Text = "Level: " + stats.Level;
             lblNextLvlPoints.Text = "Points to next level: " + stats.ExpPointsToNextLevel;
         }

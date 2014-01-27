@@ -10,15 +10,15 @@ namespace RPGPlatformerEngine.Weapons
     public class MeleeWeapon : Weapon
     {
         protected float hitRate;
-        private float hitTime;
-
         protected float hitRange = 60;
 
         Rectangle rangeRectangle;
+        Timer timer;
         public MeleeWeapon(Player player)
         {
             Player = player;
             hitRate = 0.7f;
+            timer = new Timer(hitRate, CheckHit);
         }
 
         public override void Update(GameTime gameTime)
@@ -26,6 +26,7 @@ namespace RPGPlatformerEngine.Weapons
             HandleInput(gameTime);
         }
 
+        
         protected override void HandleInput(GameTime gameTime)
         {
             int pos = Player.HorizontalDirection == HorizontalDirection.Left ? -2 * Player.Texture.Width : Player.Texture.Width; 
@@ -34,20 +35,32 @@ namespace RPGPlatformerEngine.Weapons
                 Attack(gameTime);
         }
 
+        private void CheckHit()
+        {
+            foreach (Enemy e in Player.Map.Enemies)
+                if (rangeRectangle.Intersects(e.BoundBox))
+                {
+                    int hitAmount = Player.CurrentStatistics.BaseDamage + this.Damage;//Do Calculations here.
+                    e.Hit(hitAmount, Player);
+                    return;
+                }
+        }
+
         private void Attack(GameTime gameTime)
         {
-            hitTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (hitTime >= hitRate)
-            {
-                hitTime = 0;
-                foreach (Enemy e in Player.Map.Enemies)
-                    if (rangeRectangle.Intersects(e.BoundBox))
-                    {
-                        int hitAmount = Player.CurrentStatistics.BaseDamage + this.Damage;//Do Calculations here.
-                        e.Hit(hitAmount, Player);
-                        return;
-                    }
-            }
+            timer.Update(gameTime);
+            //hitTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //if (hitTime >= hitRate)
+            //{
+            //    hitTime = 0;
+            //    foreach (Enemy e in Player.Map.Enemies)
+            //        if (rangeRectangle.Intersects(e.BoundBox))
+            //        {
+            //            int hitAmount = Player.CurrentStatistics.BaseDamage + this.Damage;//Do Calculations here.
+            //            e.Hit(hitAmount, Player);
+            //            return;
+            //        }
+            //}
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -56,6 +69,5 @@ namespace RPGPlatformerEngine.Weapons
             spriteBatch.Draw(TextureManager.SetTexture("square"), new Rectangle(rangeRectangle.X, rangeRectangle.Y, 10, 10), Color.Black);
             spriteBatch.End();
         }
-
     }
 }

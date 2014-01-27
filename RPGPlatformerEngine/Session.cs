@@ -30,7 +30,7 @@ namespace RPGPlatformerEngine
         {
             Singleton = this;
             CurrentMap = map;
-            Player = new Player(TextureManager.SetTexture("Player/player"), new Vector2(100), map);
+            Player = new Player(TextureManager.SetTexture("Player/player"), map.SpawnPoint, map);
             CurrentMap.Player = Player;
             UI.WindowManager.InitializeWindows();
 
@@ -59,9 +59,9 @@ namespace RPGPlatformerEngine
         {
             CurrentMap.Draw(spriteBatch);
             Player.Draw(spriteBatch);
-            UI.WindowManager.Draw(spriteBatch);
             HUD.Draw(spriteBatch);
-
+            UI.WindowManager.Draw(spriteBatch);
+           
         }
 
         /// <summary>

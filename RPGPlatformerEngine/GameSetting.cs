@@ -8,7 +8,7 @@ namespace RPGPlatformerEngine
 {
     public class GameSetting
     {
-        public static Keys ShootKey = Keys.LeftShift;
+        public static Keys ShootKey = Keys.Space;
         
     }
 }

@@ -27,6 +27,8 @@ namespace RPGPlatformerEngine
     public class Shroom : Enemy, IItemDroppingEnemy
     {
         Timer t;
+        float Speed = 1.5f;
+
         public Shroom()
         {
             animations["walking"] = new Animation(TextureManager.SetTexture("Monsters/shroom_walking"), 4, 1, 9);
@@ -35,7 +37,7 @@ namespace RPGPlatformerEngine
             animations["hit"] = new Animation(TextureManager.SetTexture("Monsters/shroom_hit"), 1, 1, 1);
 
             CurrentAnimation = animations["walking"];
-            Velocity = new Vector2(-1.5f, 0);
+            Velocity = new Vector2(-Speed, 0);
             Stats.ExpPointsBonus = 2;
             Stats.MaxHealth = Stats.Health = 20;
             
@@ -49,11 +51,13 @@ namespace RPGPlatformerEngine
 
         protected override void OnHit()
         {
-            CurrentAnimation = animations["hit"];
-            Vector2 oldVelocity = new Vector2(Velocity.X, Velocity.Y);
+            SetAnimation("hit");
             Velocity = Vector2.Zero;
             //after 0.5 second, return to walking animation and to the same velocity.
-            t = new Timer(0.5f, delegate() { CurrentAnimation = animations["walking"]; Velocity = oldVelocity; });
+            t = new Timer(0.5f, delegate() { 
+                SetAnimation("walking");
+                Velocity = new Vector2(Speed * (Direction == HorizontalDirection.Right ? 1 : -1), 0);
+            });
         }
 
         public void DropItem()
