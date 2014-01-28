@@ -32,11 +32,10 @@ namespace RPGPlatformerEngine
 
         RPGPlatformerEngine.Weapons.MeleeWeapon knife;
         Weapons.Gun gun;
-        public Player(Texture2D tex, Vector2 pos,Map map)
+        public Player(Vector2 pos)
         {
-            Texture = tex;
             Position = pos;
-            Map = map;
+            Map = Session.Singleton.CurrentMap;
             CurrentStatistics = new PlayerStatistics();
             Inventory = new Inventory(new Vector2(10), 7, 7);
             Inventory.AddItem(new InventoryItem("Sword"));
@@ -47,7 +46,7 @@ namespace RPGPlatformerEngine
 
             //Set up animations
             animations["Running"] = new Animation(TextureManager.SetTexture("Player/Run"), 10, 1, 9);
-            animations["Idle"] = new Animation(tex, 1, 1, 1);
+            animations["Idle"] = new Animation(TextureManager.SetTexture("Player/player"), 1, 1, 1);
             CurrentAnimation = animations["Idle"];
         }
 

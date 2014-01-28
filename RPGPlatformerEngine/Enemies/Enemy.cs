@@ -14,7 +14,11 @@ namespace RPGPlatformerEngine
 
         public HorizontalDirection Direction { get; set; }
 
+        public float Speed { get; set; }
+
         float attackTime, attackRate;
+
+        Timer animationTimer;
 
         public Enemy()
         {
@@ -28,10 +32,12 @@ namespace RPGPlatformerEngine
             if (velocity.X < 0) Direction = HorizontalDirection.Left;
             else if (velocity.X > 0) Direction = HorizontalDirection.Right;
 
+            if (animationTimer != null) animationTimer.Update(gameTime);
             UpdateMovement();
             PlayerCollision(gameTime);
         }
 
+        #region Draw methods
         public override void Draw(SpriteBatch sb)
         {
             var effect = Direction == HorizontalDirection.Left ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
@@ -48,6 +54,8 @@ namespace RPGPlatformerEngine
             Rectangle destRect = new Rectangle(BoundBox.X, BoundBox.Y - 20, (int)(width * ((float)Stats.Health /  Stats.MaxHealth)), height);
             sb.Draw(TextureManager.SetTexture("square"), destRect, Color.Red);
         }
+        #endregion
+
         /// <summary>
         /// Update the movement of the enemy
         /// </summary>
@@ -117,8 +125,18 @@ namespace RPGPlatformerEngine
         }
 
         /// <summary>
-        /// What happens when this enemy gets hit - override in derived classes.
+        /// What happens when this enemy gets hit.
         /// </summary>
-        protected virtual void OnHit() { }
+        protected virtual void OnHit() 
+        {
+            SetAnimation("hit");
+            Velocity = Vector2.Zero;
+            //after 0.5 second, return to walking animation and to the same velocity.
+            animationTimer = new Timer(0.5f, delegate()
+            {
+                SetAnimation("walking");
+                Velocity = new Vector2(Speed * (Direction == HorizontalDirection.Right ? 1 : -1), 0);
+            });
+        }
     }
 }

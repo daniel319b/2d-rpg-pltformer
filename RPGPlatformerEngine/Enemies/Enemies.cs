@@ -12,8 +12,10 @@ namespace RPGPlatformerEngine
         {
             animations["walking"] = new Animation(TextureManager.SetTexture("Monsters/red_snail"), 4, 1, 10);
             //animations["dying"] = new Animation(TextureManager.SetTexture("red_snail_dying"), 3, 1, 10);
+            animations["hit"] = new Animation(TextureManager.SetTexture("Monsters/red_snail_hit"), 1, 1, 1);
             CurrentAnimation = animations["walking"];
-            Velocity = new Vector2(-0.8f, 0);
+            Speed = 0.8f;
+            Velocity = new Vector2(-Speed, 0);
             Stats.ExpPointsBonus = 5;
             Stats.MaxHealth = Stats.Health = 50;
         }
@@ -26,38 +28,19 @@ namespace RPGPlatformerEngine
 
     public class Shroom : Enemy, IItemDroppingEnemy
     {
-        Timer t;
-        float Speed = 1.5f;
-
         public Shroom()
         {
             animations["walking"] = new Animation(TextureManager.SetTexture("Monsters/shroom_walking"), 4, 1, 9);
-            animations["dying"] = new Animation(TextureManager.SetTexture("Monsters/shroom_death"), 4, 1, 9);
+            animations["dying"] = new Animation(TextureManager.SetTexture("Monsters/shroom_death"), 4, 1, 6);
             animations["standing"] = new Animation(TextureManager.SetTexture("Monsters/shroom_standing"), 3, 1, 9);
             animations["hit"] = new Animation(TextureManager.SetTexture("Monsters/shroom_hit"), 1, 1, 1);
 
             CurrentAnimation = animations["walking"];
+            Speed = 1.5f;
             Velocity = new Vector2(-Speed, 0);
             Stats.ExpPointsBonus = 2;
             Stats.MaxHealth = Stats.Health = 20;
             
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-            if(t != null) t.Update(gameTime);
-        }
-
-        protected override void OnHit()
-        {
-            SetAnimation("hit");
-            Velocity = Vector2.Zero;
-            //after 0.5 second, return to walking animation and to the same velocity.
-            t = new Timer(0.5f, delegate() { 
-                SetAnimation("walking");
-                Velocity = new Vector2(Speed * (Direction == HorizontalDirection.Right ? 1 : -1), 0);
-            });
         }
 
         public void DropItem()

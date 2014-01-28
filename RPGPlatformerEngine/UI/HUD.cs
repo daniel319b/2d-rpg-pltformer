@@ -15,6 +15,8 @@ namespace RPGPlatformerEngine
         static FilledBar healthBar = new FilledBar(new Vector2(20, 10), Color.Gray, Color.Red) { Texture = TextureManager.SetTexture("Player/HealthBar") };
         static FilledBar expBar = new FilledBar(new Vector2(20, 80), Color.Gray, Color.Gold) { Texture = TextureManager.SetTexture("Player/HealthBar") };
 
+        static Vector2 BottomPanelPosition = new Vector2(0, 600);
+
         public static void Draw(SpriteBatch sb)
         {
             sb.Begin();
@@ -24,12 +26,11 @@ namespace RPGPlatformerEngine
 
         private static void DrawBars(SpriteBatch sb)
         {
+            var background = TextureManager.SetTexture("UI/form");
+           // sb.Draw(background, new Rectangle((int)BottomPanelPosition.X,(int)BottomPanelPosition.Y, 500, 100), Color.White);
             var stats = Session.Singleton.Player.CurrentStatistics;
             healthBar.Draw(sb, stats.Health, stats.MaxHealth);
             expBar.Draw(sb, stats.ExperiencePoints, stats.ExpPointsToNextLevel);
-            //int healthWidth =  (int)(HealthBarTexture.Width * ((double)player.CurrentStatistics.Health / player.CurrentStatistics.MaxHealth));
-            //sb.Draw(HealthBarTexture, new Vector2(20,10), Color.Gray);
-            //sb.Draw(HealthBarTexture, new Rectangle(20, 10, healthWidth, 44), Color.Gold);
         }
 
     }

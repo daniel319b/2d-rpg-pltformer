@@ -30,7 +30,7 @@ namespace RPGPlatformerEngine
         {
             Singleton = this;
             CurrentMap = map;
-            Player = new Player(TextureManager.SetTexture("Player/player"), map.SpawnPoint, map);
+            Player = new Player(map.SpawnPoint);
             CurrentMap.Player = Player;
             UI.WindowManager.InitializeWindows();
 
