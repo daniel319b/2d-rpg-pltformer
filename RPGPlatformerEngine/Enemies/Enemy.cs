@@ -18,7 +18,10 @@ namespace RPGPlatformerEngine
 
         float attackTime, attackRate;
 
-        Timer animationTimer;
+        protected Timer animationTimer;
+        private bool dying;
+
+        const float FADE_OUT_RATE = 0.03f;
 
         public Enemy()
         {
@@ -35,6 +38,9 @@ namespace RPGPlatformerEngine
             if (animationTimer != null) animationTimer.Update(gameTime);
             UpdateMovement();
             PlayerCollision(gameTime);
+
+            if (dying) Opacity -= FADE_OUT_RATE;
+            if (Opacity <= 0) OnDeath();
         }
 
         #region Draw methods
@@ -105,14 +111,26 @@ namespace RPGPlatformerEngine
         public void Hit(int hitAmount, Player player)
         {
             Stats.Health -= hitAmount;
-            OnHit();
+            
             if (Stats.Health <= 0)
             {
-                Alive = false;
-                OnDeath();
+                Dying();
                 player.OnEnemyKill(this);
                 Session.Singleton.OnEnemyKill(this);
             }
+            else 
+                OnHit();
+        }
+
+        /// <summary>
+        /// What happens when the enemy is dying(fade out, particles, whatever...)
+        /// </summary>
+        protected virtual void Dying()
+        {
+            animationTimer = null;
+            if (animations.ContainsKey("dying")) SetAnimation("dying");
+            dying = true;
+            Velocity = Vector2.Zero;
         }
 
         /// <summary>
@@ -120,6 +138,7 @@ namespace RPGPlatformerEngine
         /// </summary>
         protected virtual void OnDeath() 
         {
+            Alive = false;
             var a = this as IItemDroppingEnemy;
             if (a != null) a.DropItem();
         }

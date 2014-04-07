@@ -33,6 +33,7 @@ namespace RPGPlatformerEngine
 
         public void Hit(Enemy e)
         {
+            // Calculate damage here
             e.Hit(2, Owner);//hit the enemy.
             
         }

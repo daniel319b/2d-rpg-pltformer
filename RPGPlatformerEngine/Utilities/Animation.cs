@@ -69,7 +69,7 @@ namespace RPGPlatformerEngine
             set { texture = value; }
         }
 
-        private bool repeating;
+        private bool repeating = true;
 
         /// <summary>
         /// Determines if the animation is repeating or not.
@@ -90,6 +90,16 @@ namespace RPGPlatformerEngine
             get { return position; }
             set { position = value; }
         }
+
+        /// <summary>
+        /// The opacity of this animation.
+        /// </summary>
+        public float Opacity { get; set; }
+
+        /// <summary>
+        /// The color of this animation
+        /// </summary>
+        public Color Color { get; set; }
 
         /// <summary>
         /// Is this animation active or not?
@@ -115,8 +125,10 @@ namespace RPGPlatformerEngine
             //calculate the frame time.
             frameTime = 1.0f / framesPerSecond;
             Reset();//reset all the update components.
-            repeating = true;
+            
             Active = true;
+            Color = Color.White;
+            Opacity = 1;
         }
 
         /// <summary>
@@ -166,14 +178,14 @@ namespace RPGPlatformerEngine
         public void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Begin();
-            spriteBatch.Draw(texture, position, currentFrameRect, Color.White , 0, new Vector2(frameSize.X  / 2, frameSize.Y / 2), 1,SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position, currentFrameRect, Color * Opacity , 0, new Vector2(frameSize.X  / 2, frameSize.Y / 2), 1,SpriteEffects.None, 0);
            // spriteBatch.End();
 
         }
 
         public void Draw(SpriteBatch spriteBatch, SpriteEffects effects)
         {
-            spriteBatch.Draw(texture, position, currentFrameRect, Color.White, 0, new Vector2(frameSize.X / 2, frameSize.Y / 2), 1, effects, 0);
+            spriteBatch.Draw(texture, position, currentFrameRect, Color * Opacity, 0, new Vector2(frameSize.X / 2, frameSize.Y / 2), 1, effects, 0);
         }
         /// <summary>
         /// Draws the animation.
@@ -185,14 +197,22 @@ namespace RPGPlatformerEngine
         public void Draw(SpriteBatch spriteBatch, float rotation, float scale, Vector2 origin)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, position, currentFrameRect, Color.White, rotation, origin, scale, SpriteEffects.FlipHorizontally, 0.0f);
+            spriteBatch.Draw(texture, position, currentFrameRect, Color * Opacity, rotation, origin, scale, SpriteEffects.FlipHorizontally, 0.0f);
             spriteBatch.End();
         }
 
+        /// <summary>
+        /// Draw the animation with a given matrix for transformations.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="rotation"></param>
+        /// <param name="scale"></param>
+        /// <param name="origin"></param>
+        /// <param name="transformation"></param>
         public void Draw(SpriteBatch spriteBatch, float rotation, float scale, Vector2 origin, Matrix transformation)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, transformation);
-            spriteBatch.Draw(texture, position, currentFrameRect, Color.White, rotation, origin, scale, SpriteEffects.FlipHorizontally, 0.0f);
+            spriteBatch.Draw(texture, position, currentFrameRect, Color * Opacity, rotation, origin, scale, SpriteEffects.FlipHorizontally, 0.0f);
             spriteBatch.End();
         }
 

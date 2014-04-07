@@ -12,8 +12,11 @@ namespace RPGPlatformerEngine
     /// </summary>
     public class HUD
     {
-        static FilledBar healthBar = new FilledBar(new Vector2(20, 10), Color.Gray, Color.Red) { Texture = TextureManager.SetTexture("Player/HealthBar") };
-        static FilledBar expBar = new FilledBar(new Vector2(20, 80), Color.Gray, Color.Gold) { Texture = TextureManager.SetTexture("Player/HealthBar") };
+        static FilledBar healthBar = new FilledBar(new Vector2(20, 10), Color.Gray, Color.Red);
+        static FilledBar expBar = new FilledBar(new Vector2(20, 80), Color.Gray, Color.Gold);
+
+        static UI.Label lblHealth = new UI.Label(healthBar.Position + new Vector2(10, 9), "");
+        static UI.Label lblExp = new UI.Label(expBar.Position + new Vector2(10, 9), "");
 
         static Vector2 BottomPanelPosition = new Vector2(0, 600);
 
@@ -26,11 +29,16 @@ namespace RPGPlatformerEngine
 
         private static void DrawBars(SpriteBatch sb)
         {
-            var background = TextureManager.SetTexture("UI/form");
+            Texture2D background = TextureManager.SetTexture("UI/form");
            // sb.Draw(background, new Rectangle((int)BottomPanelPosition.X,(int)BottomPanelPosition.Y, 500, 100), Color.White);
             var stats = Session.Singleton.Player.CurrentStatistics;
+            lblExp.Text = string.Format("EXP points: {0}/{1}", stats.ExperiencePoints, stats.ExpPointsToNextLevel);
+            lblHealth.Text = string.Format("Health: {0}/{1}", stats.Health, stats.MaxHealth);
+
             healthBar.Draw(sb, stats.Health, stats.MaxHealth);
             expBar.Draw(sb, stats.ExperiencePoints, stats.ExpPointsToNextLevel);
+            lblExp.Draw(sb);
+            lblHealth.Draw(sb);
         }
 
     }
@@ -54,6 +62,7 @@ namespace RPGPlatformerEngine
             BackColor = backColor;
             BarColor = barColor;
             Size = Vector2.Zero;
+            Texture = TextureManager.SetTexture("Player/HealthBar");
         }
 
         public void Draw(SpriteBatch sb, int value, int maxValue)

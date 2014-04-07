@@ -39,8 +39,18 @@ namespace RPGPlatformerEngine
         {
             
             Player.Update(gameTime);
-            foreach (Enemy e in Enemies)
-                e.Update(gameTime);
+
+            for (int i = 0; i < Enemies.Count; i++)
+            {
+                Enemies[i].Update(gameTime);
+                if (Enemies[i].Alive == false)
+                {
+                    Enemies.RemoveAt(i);
+                    i--;
+                }
+            }
+            
+                
             
             foreach (PickableItem item in pickeableItems)
             {

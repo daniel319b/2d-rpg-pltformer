@@ -21,9 +21,12 @@ namespace RPGPlatformerEngine
             }
         }
 
+        new public float Opacity { get; set; }
+
         public AnimatedObject()
         {
-            animations = new Dictionary<string, Animation>();   
+            animations = new Dictionary<string, Animation>();
+            Opacity = 1;
         }
 
         public virtual void Update(GameTime gameTime)
@@ -31,6 +34,7 @@ namespace RPGPlatformerEngine
             base.Update();
             CurrentAnimation.Position = Position;
             CurrentAnimation.Update(gameTime);
+            CurrentAnimation.Opacity = Opacity;
         }
 
         public override void Draw(SpriteBatch sb)

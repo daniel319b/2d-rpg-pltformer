@@ -11,7 +11,7 @@ namespace RPGPlatformerEngine
         public RedSnail()
         {
             animations["walking"] = new Animation(TextureManager.SetTexture("Monsters/red_snail"), 4, 1, 10);
-            //animations["dying"] = new Animation(TextureManager.SetTexture("red_snail_dying"), 3, 1, 10);
+            animations["dying"] = new Animation(TextureManager.SetTexture("Monsters/red_snail_death"), 3, 1, 5) { Repeating = false };
             animations["hit"] = new Animation(TextureManager.SetTexture("Monsters/red_snail_hit"), 1, 1, 1);
             CurrentAnimation = animations["walking"];
             Speed = 0.8f;
@@ -28,10 +28,11 @@ namespace RPGPlatformerEngine
 
     public class Shroom : Enemy, IItemDroppingEnemy
     {
+        private bool fadeOut;
         public Shroom()
         {
             animations["walking"] = new Animation(TextureManager.SetTexture("Monsters/shroom_walking"), 4, 1, 9);
-            animations["dying"] = new Animation(TextureManager.SetTexture("Monsters/shroom_death"), 4, 1, 6);
+            animations["dying"] = new Animation(TextureManager.SetTexture("Monsters/shroom_death"), 4, 1, 4) { Repeating = false };
             animations["standing"] = new Animation(TextureManager.SetTexture("Monsters/shroom_standing"), 3, 1, 9);
             animations["hit"] = new Animation(TextureManager.SetTexture("Monsters/shroom_hit"), 1, 1, 1);
 
@@ -40,13 +41,13 @@ namespace RPGPlatformerEngine
             Velocity = new Vector2(-Speed, 0);
             Stats.ExpPointsBonus = 2;
             Stats.MaxHealth = Stats.Health = 20;
-            
         }
 
         public void DropItem()
         {
             Session.Singleton.CurrentMap.AddPickable(new BronzeCoin() { Position = Position });
         }
+       
     }
 
     public interface IItemDroppingEnemy
